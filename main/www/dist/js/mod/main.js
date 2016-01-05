@@ -3,8 +3,7 @@ define(function( require ){
     window.mod = window.mod || {};
     
     // lib prefetched ids, see ../initialize.js
-    var _TweenMax = require('tweenmax');
-    //,   _Modernizr = require('modernizr');
+    var __tween_max__ = require('tweenmax');
     
     /*- Main function -*/
     ;(function( $, a ){
@@ -24,7 +23,8 @@ define(function( require ){
         //--> external mods
         a.extend = function(){
             var extensions = [
-                    './mod.test'
+                    
+                    //'./mod.test'
                 ];
             
             require( extensions );

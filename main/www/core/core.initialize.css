@@ -1,0 +1,106 @@
+@import url(../dist/css/fonts/fonts.css);
+
+html,
+body{
+    position: relative;
+    z-index: 1;
+    
+    width: 100vw;
+    height: 100vh;
+    
+    top: 0;
+    left: 0; 
+    
+    margin: 0;
+    padding: 0;
+    
+    clear: both;
+}
+
+/*--
+ - Viewport
+ --*/
+#viewport{
+    position: inherit;
+    
+    width: inherit;
+    height: inherit;
+    z-index: 1;
+    
+    background-color: #89bc23;
+}
+
+/*--
+ - Home
+ --*/
+[data-screen="home"]{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+[data-screen="home"]::before{
+    content: '';
+    position: absolute;
+    
+    width: 100%;
+    height: 100vh;
+    
+    background: url(../dist/img/bg-home.jpg) no-repeat left center;
+    background-size: cover;
+    
+    -webkit-filter: blur(7px) saturate(0.5) brightness(1.1);
+    filter: blur(7px) saturate(0.5) brightness(1.1);
+    
+    z-index: -1;
+}
+
+/*--
+ - Header 
+ --*/
+[data-screen="home"] #home-header{
+    position: absolute;
+    width: 100%;
+    margin-top: 10%;
+    
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    
+    -webkit-transition: -webkit-transform 0.5s cubic-bezier(.99, 0, .21, 1.5);
+    transition: transform 0.5s cubic-bezier(.99, 0, .21, 1.5);
+}
+
+[data-screen="home"] #home-header.preload-prog{
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+[data-screen="home"] h2{
+    position: relative;
+    width: 270px;
+    height: 205px;
+    
+    margin: 0 auto;
+    
+    font-family: 'mclarenregular', arial;
+    text-align: center;
+    color: white;
+    
+    overflow: hidden;
+    border-radius: 100%;
+    
+    background-color: rgba(0,0,0,0.3);
+}
+
+[data-screen="home"] h2 span{
+    display: block;
+}
+
+[data-screen="home"] h2 .h2-x1:first-of-type{
+    margin-top: 35px;
+}
+
+[data-screen="home"] h2 .h2-x2{
+    font-size: 40px;
+    text-transform: uppercase;
+}

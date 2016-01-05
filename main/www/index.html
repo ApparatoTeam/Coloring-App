@@ -3,18 +3,31 @@
     <head>
         <meta charset="utf-8" lang="en">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
         <meta name="apple-mobile-web-app-capable" content="no">
+        <meta name="application-name" content="Children Coloring App">
         <title>Coloring App</title>
+        <!-- core init stylesheet -->
+        <link rel="stylesheet" type="text/css" href="core/core.initialize.css" data-css="core">
+    </head>
+    <body id="viewport" data-platform>
         
-        <!-- stylesheets -->
-        <link rel="stylesheet" type="text/css" href="dist/css/base.css" data-css="base">
+        <section data-screen="home">
+            <header id="home-header">
+                <h2>
+                    <span class="h2-x1">Mobile</span>
+                    <span class="h2-x2">Coloring</span>
+                    <span class="h2-x1">Book</span>
+                </h2>
+            </header>
+            
+            <div id="preloader"></div>
+            
+        </section>
         
         <!-- AMD terms -->
-        <script data-main="dist/js/initialize" src="dist/js/lib/require.js"></script>
-    </head>
-    <body id="page-viewport" data-platform="">
-        
-        <h2>Loading Coloring Book...</h2>
-        
+        <script src="cordova.js"></script>
+        <script data-main="core/core.initialize" src="core/require.js"></script>
     </body>
 </html>
