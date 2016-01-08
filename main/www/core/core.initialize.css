@@ -2,19 +2,18 @@
 
 html,
 body{
-    position: relative;
+    position: fixed;
     z-index: 1;
     
-    width: 100vw;
-    height: 100vh;
-    
     top: 0;
-    left: 0; 
+    right: 0;
+    bottom: 0;
+    left: 0;
     
-    margin: 0;
+    margin: auto;
     padding: 0;
-    
     clear: both;
+    overflow: hidden !important;
 }
 
 /*--
@@ -25,34 +24,19 @@ body{
     
     width: inherit;
     height: inherit;
+    
     z-index: 1;
     
-    background-color: #89bc23;
+    background-color: #fa6387;
 }
 
 /*--
  - Home
  --*/
 [data-screen="home"]{
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 100%;
-}
-
-[data-screen="home"]::before{
-    content: '';
-    position: absolute;
-    
-    width: 100%;
-    height: 100vh;
-    
-    background: url(../dist/img/bg-home.jpg) no-repeat left center;
-    background-size: cover;
-    
-    -webkit-filter: blur(7px) saturate(0.5) brightness(1.1);
-    filter: blur(7px) saturate(0.5) brightness(1.1);
-    
-    z-index: -1;
 }
 
 /*--
@@ -61,24 +45,28 @@ body{
 [data-screen="home"] #home-header{
     position: absolute;
     width: 100%;
-    margin-top: 10%;
+    height: auto;
     
-    -webkit-transform: scale(0);
-    transform: scale(0);
+    top: 50%;
+    left: 50%;
     
-    -webkit-transition: -webkit-transform 0.5s cubic-bezier(.99, 0, .21, 1.5);
-    transition: transform 0.5s cubic-bezier(.99, 0, .21, 1.5);
-}
-
-[data-screen="home"] #home-header.preload-prog{
-    -webkit-transform: scale(1);
-    transform: scale(1);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    
+    /*- adjuster -*/
+    margin-top: -15px;
+    
+    clear: both;
+    
+    pointer-events: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 [data-screen="home"] h2{
     position: relative;
-    width: 270px;
-    height: 205px;
+    width: 320px;
+    height: 185px;
     
     margin: 0 auto;
     
@@ -89,7 +77,13 @@ body{
     overflow: hidden;
     border-radius: 100%;
     
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0,0,0,0.5);
+    
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    
+    opacity: 0;
+    visibility: hidden;
 }
 
 [data-screen="home"] h2 span{
@@ -97,10 +91,82 @@ body{
 }
 
 [data-screen="home"] h2 .h2-x1:first-of-type{
-    margin-top: 35px;
+    margin-top: 27px;
 }
 
 [data-screen="home"] h2 .h2-x2{
     font-size: 40px;
     text-transform: uppercase;
 }
+
+/*--
+ - Wallpaper [home]
+ --*/
+[data-screen="home"] #home-wallpaper{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: table;
+}
+
+[data-screen="home"] #home-wallpaper span{
+    position: relative;
+    margin: 0;
+    display: table-cell;
+    
+    width: calc(100% / 7);
+    height: 100%;
+    
+    background-repeat: no-repeat;
+    background-position: center center;
+    
+    opacity: 0;
+    visibility: hidden;
+    
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+}
+
+[data-screen="home"] #home-wallpaper span:nth-of-type(1){ background-image: url(../dist/img/home/color-stripe.jpg); }
+[data-screen="home"] #home-wallpaper span:nth-of-type(2){ background-image: url(../dist/img/home/color-stripe-orange.jpg); }
+[data-screen="home"] #home-wallpaper span:nth-of-type(3){ background-image: url(../dist/img/home/color-stripe-green.jpg); }
+[data-screen="home"] #home-wallpaper span:nth-of-type(4){ background-image: url(../dist/img/home/color-stripe-yellow.jpg); }
+[data-screen="home"] #home-wallpaper span:nth-of-type(5){ background-image: url(../dist/img/home/color-stripe-blue.jpg); }
+[data-screen="home"] #home-wallpaper span:nth-of-type(6){ background-image: url(../dist/img/home/color-stripe-blue2.jpg); }
+[data-screen="home"] #home-wallpaper span:nth-of-type(7){ background-image: url(../dist/img/home/color-stripe-violet2.jpg);}
+
+[data-screen="home"] #home-wallpaper span{ background-size: 100% 100%; }
+
+/*--
+ - Preloader
+ --*/
+[data-screen="home"] #home-preloader{
+    position: absolute;
+    bottom: 0;
+    
+    width: 100%;
+    height: 30px;
+    
+    background-color: rgba(0,0,0,0.5);
+    
+    opacity: 0;
+    visibility: hidden;
+}
+
+[data-screen="home"] #home-preloader #preloader-progress{
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    width: 0%;
+    height: 4px;
+    
+    background-color: #A6E019;
+}
+
+[data-screen="home"] #home-preloader #preloader-text{
+    color: white;
+    font: 13px/33px 'open_sansregular', arial;
+    text-align: center;
+}
+

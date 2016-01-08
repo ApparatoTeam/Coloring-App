@@ -14,6 +14,17 @@
     <body id="viewport" data-platform>
         
         <section data-screen="home">
+            
+            <div id="home-wallpaper">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
             <header id="home-header">
                 <h2>
                     <span class="h2-x1">Mobile</span>
@@ -22,12 +33,18 @@
                 </h2>
             </header>
             
-            <div id="preloader"></div>
+            <div id="home-preloader">
+                <section id="preloader-progress"></section>
+                <section id="preloader-text"></section>
+            </div>
             
         </section>
         
-        <!-- AMD terms -->
         <script src="cordova.js"></script>
+        <script src="dist/js/lib/jquery-2.1.4.min.js"></script>
+        <script src="dist/js/lib/jquery.mobile-1.4.5.min.js"></script>
+        <script src="dist/js/lib/TweenMax.min.js"></script>
+        <!-- AMD terms -->
         <script data-main="core/core.initialize" src="core/require.js"></script>
     </body>
 </html>
