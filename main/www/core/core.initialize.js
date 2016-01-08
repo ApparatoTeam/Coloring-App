@@ -12,18 +12,27 @@ require( ['require.domReady'], function(domReady){
             init : function(){
                 var self = this;
                 
+                this.api();
                 this.preload.intro( function(){
-                    
                     TweenMax.to('#home-preloader', 0.2, {
                         autoAlpha : 1,
                         onComplete : function(){
                             self.preload.process.isRequired();
                          }
                      });
-                    
                  });
                 
              }, /*- end startup.init -*/
+            
+            api : function(){
+                requirejs.config({
+                    baseUrl : 'dist',
+                    paths : {
+                        text  : '../core/require.text',
+                        image : '../core/require.image'
+                     }
+                 });
+             },
             
             preload : {
                 dom : $('#home-progress'),
@@ -63,22 +72,21 @@ require( ['require.domReady'], function(domReady){
                             d : 0.899, // 1.5 * (18/30)
                             f : function(){
                                 
-                                if( parseFloat( ua.match(/Android\s+([\d\.]+)/)[1] ) > 4.1 ){ /*- passed sys android ver -*/
+                                if( parseFloat( ua.match(/Android\s+([\d\.]+)/)[1] ) >= 4.2 ){ /*- passed sys android ver -*/
                                     //*--> update node #2
                                     self.updateProgress({
                                         s : 30, 
                                         t : 'Checking LAN connection...',
-                                        d : 0.4 // 1.5 * (12/30)
+                                        d : 0.4, // 1.5 * (12/30)
+                                        f : function(){
+                                            self._screens();
+                                         }
                                      });
                                     
                                  }else{ /*- failed -*/
                                     self.updateProgress({
-                                        s : 0, // reset the step to 0%
-                                        t : 'System requirements failed',
-                                        d : 0,
-                                        f : function(){
-                                            // prompt error, dropdown alert
-                                         }
+                                        t : 'Error: minimum Android KitKat version required.',
+                                        e : true
                                      });
                                   }
                              }
@@ -88,7 +96,73 @@ require( ['require.domReady'], function(domReady){
                      },
                     
                     _screens : function(){
-                        var self = this;
+                        var self = this
+                        ,   list = [
+                                'text!screen/sc-settings.html',
+                                'text!screen/sc-about.html'
+                                //'sc-category',
+                                //'sc-level',
+                                //'sc-canvas'
+                            ];
+                        
+                        requirejs(list, 
+                        function(){
+                            //*--> update node #3
+                            self.updateProgress({
+                                s : app.startup.preload.progress.step + 25,
+                                t : 'Loading screen templates...',
+                                d : (0.25 * 5),
+                                f : function(){
+                                    self._media();
+                                 }
+                             });
+                         },
+                        function(error){
+                            self.updateProgress({
+                                t : 'Error: Missing screen materials.',
+                                e : true
+                             });
+                            
+                         });
+                            
+                        return this;
+                     },
+                    
+                    _media : function(){
+                        var self = this
+                        ,   list = [
+                                'image!dist/img/home/color-stripe.jpg!bust',
+                                'image!dist/img/home/color-stripe-blue.jpg!bust',
+                                'image!dist/img/home/color-stripe-blue2.jpg!bust'
+                            ]
+                        ;
+                        
+                        requirejs(list, 
+                        function(){
+                            //*--> update node #4
+                            self.updateProgress({
+                                s : app.startup.preload.progress.step + 20,
+                                t : 'Loading media files...',
+                                d : (0.20 * 5),
+                                f : function(){
+                                    //self._media();
+                                 }
+                             });
+                         },
+                        function(){
+                            self.updateProgress({
+                                t : 'Error: Missing media files.',
+                                e : true
+                             });
+                         });
+                                  
+                        return this;
+                     },
+                    
+                    _database : function(){
+                        var self = this
+                        ,   list = []
+                        ;
                         
                         
                         
@@ -98,10 +172,19 @@ require( ['require.domReady'], function(domReady){
                     updateProgress : function( p ){
                         var o = $('#home-preloader');
                         
+                        p.s = p.s || 0;
+                        p.t = p.t || '';
                         p.d = p.d || 1;
+                        p.f = p.f || null;
+                        p.e = p.e || false;
                         
                         app.startup.preload.progress.step = p.s;
                         app.startup.preload.progress.text = p.t;
+                        
+                        if( p.e )
+                            TweenLite.to( o, 0.2, {
+                                backgroundColor: 'rgba(222, 31, 31, 0.75)'
+                             });
                         
                         setTimeout(function(){
                             
@@ -111,14 +194,18 @@ require( ['require.domReady'], function(domReady){
                                     o.find('#preloader-text').html( p.t );
                                  },
                                 onComplete : function(){
-                                    if( ( typeof p.f ).match(/function/) )
+                                    if( ( typeof p.f ).match(/function/) ){
                                         p.f();
+                                        console.log('callback...');
+                                     }  
+                                        
                                  }
                              });
                             
                         }, 10);
+                        
+                        return this;
                      }
-                    
                  },
                 
                 intro : function( cb ){
