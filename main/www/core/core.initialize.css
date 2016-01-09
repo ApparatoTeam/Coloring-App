@@ -170,3 +170,13 @@ body{
     text-align: center;
 }
 
+/*--
+ - Start button
+ --*/
+[data-screen="home"] [data-button="initiate-app"]{
+    position: absolute;
+    color: white;
+    font: 20px/100% 'open_sansregular';
+    text-transform: uppercase;
+}
+

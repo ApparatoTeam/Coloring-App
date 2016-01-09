@@ -42,21 +42,38 @@ require( ['require.domReady'], function(domReady){
                     text : ''
                  },
                 
-                done : function(){
-                    console.log('Let\'s get started!');
-                 },
-                
-                failed : function(){
+                done : {
+                    init : function(){
+                        this.animate( this.userEvent() );
+                     },
                     
+                    animate : function(){
+                        var tm = new TimelineMax();
+                        
+                        requirejs(['js/lib/jquery.lettering'], function(){
+                            
+                            $('#home-preloader').before('<div data-button="initiate-app">Start</div>');
+                            
+                            $('[data-button=initiate-app]').lettering();
+                            
+                         });
+                        
+                        return this;
+                     },
+                    
+                    userEvent : function(){
+                        
+                     }
                  },
                 
                 /*- 5-second preload rule -*/
                 process : {
                     isRequired : function(){
-                        if( app.startup.preload.progress.step < 100 ){
+                        if( app.startup.preload.progress.step <= 100 ){
                             this._sysRequirements();
                          }else{
-                             app.startup.preload.done();
+                             app.startup.preload.progress.step = 100;
+                             app.startup.preload.done.init();
                           }    
                      },
                     
@@ -145,11 +162,11 @@ require( ['require.domReady'], function(domReady){
                                 t : 'Loading media files...',
                                 d : (0.20 * 5),
                                 f : function(){
-                                    //self._media();
+                                    self._database();
                                  }
                              });
                          },
-                        function(){
+                        function(error){
                             self.updateProgress({
                                 t : 'Error: Missing media files.',
                                 e : true
@@ -161,10 +178,27 @@ require( ['require.domReady'], function(domReady){
                     
                     _database : function(){
                         var self = this
-                        ,   list = []
+                        /*- temp cache files -*/
+                        ,   list = [
+                                'text!tmp/tmp.json'
+                            ]
                         ;
                         
-                        
+                        requirejs(list,
+                        function(){
+                            //*--> update node #5
+                            self.updateProgress({
+                                s : app.startup.preload.progress.step + 25,
+                                t : 'Loading cache and database...',
+                                d : (0.25 * 5),
+                                f : function(){
+                                    app.startup.preload.done.init();
+                                 }
+                             });
+                         },
+                        function(error){
+                            console.log('new user');
+                         });
                         
                         return this;
                      },
@@ -190,6 +224,7 @@ require( ['require.domReady'], function(domReady){
                             
                             TweenMax.to( o.find('#preloader-progress'), p.d, {
                                 width : p.s+'%',
+                                ease : Linear.easeNone,
                                 onStart : function(){
                                     o.find('#preloader-text').html( p.t );
                                  },
@@ -206,7 +241,7 @@ require( ['require.domReady'], function(domReady){
                         
                         return this;
                      }
-                 },
+                 }, /*- end this.preload.process -*/
                 
                 intro : function( cb ){
                     var stagger_bg = 0.2
@@ -264,7 +299,8 @@ require( ['require.domReady'], function(domReady){
                     
                     /*- temp -*/
                     timeline.progress(1);
-                 }
+                    
+                 } /*- end startup.preload.intro -*/
                 
              } /*- end startup.preload -*/
             
