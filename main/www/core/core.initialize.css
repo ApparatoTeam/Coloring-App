@@ -1,4 +1,4 @@
-@import url(../dist/css/fonts/fonts.css);
+@import url(../dist/css/parse.css);
 
 html,
 body{
@@ -21,28 +21,24 @@ body{
  --*/
 #viewport{
     position: inherit;
-    
     width: inherit;
     height: inherit;
-    
     z-index: 1;
     
-    background-color: #fa6387;
+    background: #FFBE44 url(../dist/img/bg-canvas-list.jpg) no-repeat 50% 50% / 100% 100%;
 }
 
 /*--
  - Home
  --*/
-[data-screen="home"]{
-    position: absolute;
-    width: 100%;
-    height: 100%;
+[data-screen="index"]{
+    
 }
 
 /*--
  - Header 
  --*/
-[data-screen="home"] #home-header{
+[data-screen="index"] #home-header{
     position: absolute;
     width: 100%;
     height: auto;
@@ -55,15 +51,10 @@ body{
     
     /*- adjuster -*/
     margin-top: -15px;
-    
     clear: both;
-    
-    pointer-events: none;
-    -webkit-user-select: none;
-    user-select: none;
 }
 
-[data-screen="home"] h2{
+[data-screen="index"] h2{
     position: relative;
     width: 320px;
     height: 185px;
@@ -79,37 +70,77 @@ body{
     
     background-color: rgba(0,0,0,0.5);
     
-    -webkit-transform: scale(0);
-    transform: scale(0);
-    
     opacity: 0;
     visibility: hidden;
 }
 
-[data-screen="home"] h2 span{
+[data-screen="index"] h2 > span{
     display: block;
 }
 
-[data-screen="home"] h2 .h2-x1:first-of-type{
+[data-screen="index"] h2 .h2-x1:first-of-type{
     margin-top: 27px;
 }
 
-[data-screen="home"] h2 .h2-x2{
+[data-screen="index"] h2 .h2-x2{
     font-size: 40px;
     text-transform: uppercase;
 }
 
 /*--
+ - Start button
+ --*/
+[data-screen="index"] [data-button="initiate-app"]{
+    position: absolute;
+    bottom: 20px;
+    width: 150px;
+    
+    color: white;
+    font: 25px/100% 'ralewayheavy';
+    text-transform: uppercase;
+    
+    padding: 10px 20px;
+    left: 50%;
+    
+    background-color: rgba(22,212,212,0.5);
+    border-radius: 30px;
+    
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    
+    opacity: 0;
+    visibility: hidden;
+    
+    -webkit-user-select: none;
+    
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+[data-screen="index"] [data-button="initiate-app"] > span{
+    display: inline-block;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+
+[data-screen="index"] [data-button="initiate-app"]:active{
+    background-color: rgba(22,212,212,0.3);
+    
+    -webkit-transform: translateX(-50%) scale(0.9);
+    transform: translateX(-50%) scale(0.9);
+}
+
+/*--
  - Wallpaper [home]
  --*/
-[data-screen="home"] #home-wallpaper{
+[data-screen="index"] #home-wallpaper{
     position: absolute;
     width: 100%;
     height: 100%;
     display: table;
 }
 
-[data-screen="home"] #home-wallpaper span{
+[data-screen="index"] #home-wallpaper span{
     position: relative;
     margin: 0;
     display: table-cell;
@@ -120,27 +151,27 @@ body{
     background-repeat: no-repeat;
     background-position: center center;
     
-    opacity: 0;
-    visibility: hidden;
+    opacity: 1;
+    visibility: visible;
     
-    -webkit-transform: translateY(-100%);
-    transform: translateY(-100%);
+    -webkit-transform: translateY(0%);
+    transform: translateY(0%);
 }
 
-[data-screen="home"] #home-wallpaper span:nth-of-type(1){ background-image: url(../dist/img/home/color-stripe.jpg); }
-[data-screen="home"] #home-wallpaper span:nth-of-type(2){ background-image: url(../dist/img/home/color-stripe-orange.jpg); }
-[data-screen="home"] #home-wallpaper span:nth-of-type(3){ background-image: url(../dist/img/home/color-stripe-green.jpg); }
-[data-screen="home"] #home-wallpaper span:nth-of-type(4){ background-image: url(../dist/img/home/color-stripe-yellow.jpg); }
-[data-screen="home"] #home-wallpaper span:nth-of-type(5){ background-image: url(../dist/img/home/color-stripe-blue.jpg); }
-[data-screen="home"] #home-wallpaper span:nth-of-type(6){ background-image: url(../dist/img/home/color-stripe-blue2.jpg); }
-[data-screen="home"] #home-wallpaper span:nth-of-type(7){ background-image: url(../dist/img/home/color-stripe-violet2.jpg);}
+[data-screen="index"] #home-wallpaper span:nth-of-type(1){ background-image: url(../dist/img/home/color-stripe.jpg); }
+[data-screen="index"] #home-wallpaper span:nth-of-type(2){ background-image: url(../dist/img/home/color-stripe-orange.jpg); }
+[data-screen="index"] #home-wallpaper span:nth-of-type(3){ background-image: url(../dist/img/home/color-stripe-green.jpg); }
+[data-screen="index"] #home-wallpaper span:nth-of-type(4){ background-image: url(../dist/img/home/color-stripe-yellow.jpg); }
+[data-screen="index"] #home-wallpaper span:nth-of-type(5){ background-image: url(../dist/img/home/color-stripe-blue.jpg); }
+[data-screen="index"] #home-wallpaper span:nth-of-type(6){ background-image: url(../dist/img/home/color-stripe-blue2.jpg); }
+[data-screen="index"] #home-wallpaper span:nth-of-type(7){ background-image: url(../dist/img/home/color-stripe-violet2.jpg);}
 
-[data-screen="home"] #home-wallpaper span{ background-size: 100% 100%; }
+[data-screen="index"] #home-wallpaper span{ background-size: 100% 100%; }
 
 /*--
  - Preloader
  --*/
-[data-screen="home"] #home-preloader{
+[data-screen="index"] #home-preloader{
     position: absolute;
     bottom: 0;
     
@@ -153,7 +184,7 @@ body{
     visibility: hidden;
 }
 
-[data-screen="home"] #home-preloader #preloader-progress{
+[data-screen="index"] #home-preloader #preloader-progress{
     position: absolute;
     top: 0;
     left: 0;
@@ -164,19 +195,8 @@ body{
     background-color: #A6E019;
 }
 
-[data-screen="home"] #home-preloader #preloader-text{
+[data-screen="index"] #home-preloader #preloader-text{
     color: white;
-    font: 13px/33px 'open_sansregular', arial;
+    font: 13px/33px 'ralewayregular', arial;
     text-align: center;
 }
-
-/*--
- - Start button
- --*/
-[data-screen="home"] [data-button="initiate-app"]{
-    position: absolute;
-    color: white;
-    font: 20px/100% 'open_sansregular';
-    text-transform: uppercase;
-}
-

@@ -1,0 +1,91 @@
+{
+    "canvas" : [
+        
+        {
+            "name" : "beginner",
+            "alias": "shapes",
+            "theme": "#FFE002",
+            "items" : [
+                {
+                    "code": "001",
+                    "name"   : "circle",
+                    "index"  : 1,
+                    "locked" : false,
+                    "source" : "img/canvas/shapes/circle.svg",
+                    "best-score" : 2
+                },
+                {
+                    "code": "002",
+                    "name"   : "triangle",
+                    "index"  : 2,
+                    "locked" : false,
+                    "source" : "img/canvas/shapes/triangle.svg",
+                    "best-score" : 3
+                },
+                {
+                    "code": "003",
+                    "name"   : "square",
+                    "index"  : 3,
+                    "locked" : false,
+                    "source" : "img/canvas/shapes/square.svg",
+                    "best-score" : 2
+                },
+                {
+                    "code": "004",
+                    "name"   : "oval",
+                    "index"  : 4,
+                    "locked" : false,
+                    "source" : "img/canvas/shapes/oval.svg",
+                    "best-score" : 1
+                },
+                {
+                    "code": "005",
+                    "name"   : "star",
+                    "index"  : 5,
+                    "locked" : false,
+                    "source" : "img/canvas/shapes/star.svg",
+                    "best-score" : 0
+                }
+            ]
+        },
+        
+        {
+            "name" : "intermmediate",
+            "alias": "animals",
+            "theme" : "#BFFF42",
+            "items" : [
+                {
+                    "code": "001",
+                    "name"   : "chicken",
+                    "index"  : 1,
+                    "locked" : false
+                },
+                {
+                    "code": "002",
+                    "name"   : "pig",
+                    "index"  : 2,
+                    "locked" : true
+                },
+                {
+                    "code": "003",
+                    "name"   : "frog",
+                    "index"  : 3,
+                    "locked" : true
+                },
+                {
+                    "code": "004",
+                    "name"   : "dog",
+                    "index"  : 4,
+                    "locked" : true
+                },
+                {
+                    "code": "005",
+                    "name"   : "cat",
+                    "index"  : 5,
+                    "locked" : true
+                }
+            ]
+        }
+        
+    ]
+}

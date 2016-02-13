@@ -1,0 +1,508 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <link rel="stylesheet" type="text/css" href="../../../core/core.initialize.css">
+    </head>
+
+    <body id="viewport">
+        <section data-screen="canvas-main" data-ease-from="">
+            
+            <div id="navigation">
+                <div id="nav-button-home" class="nav-button">
+                    <i class="fa fa-fw fa-home fa-2x button"></i>
+                </div>
+
+                <div id="nav-page-header">
+                    <span id="canvas-name">Circle</span>
+                    <span id="canvas-category">Shapes</span>
+                </div>
+
+                <div id="nav-button-stats" class="nav-button">
+                    <i class="fa fa-fw fa-th-list button"></i>
+                </div>
+
+            </div><!--/#navigation-->
+
+            <div id="canvas-container">
+
+                <div class="panel" id="panel-toolbar">
+                    <div id="non-colour" data-palette-misc="save">
+                        <div class="tool">
+                            <i class="fa fa-fw fa-save fa-2x"></i>
+                        </div>
+                        
+                        <section id="save-alert">
+                            2 segments left
+                        </section>
+                    </div>
+                    
+                    <div id="non-colour" data-palette-misc="clear">
+                        <div class="tool">
+                            <i class="fa fa-fw fa-eraser fa-2x"></i>
+                        </div>
+                    </div>
+                    
+                    <div id="colour">
+                        <div id="scroller">
+                            <div class="tool" data-palette-color="red" style="background-color: red;"></div>
+                            <div class="tool" data-palette-color="orange" style="background-color: orange;"></div>
+                            <div class="tool" data-palette-color="yellow" style="background-color: yellow;"></div>
+                            <div class="tool" data-palette-color="green" style="background-color: green;"></div>
+                            <div class="tool" data-palette-color="blue" style="background-color: blue;"></div>
+                            <div class="tool" data-palette-color="indigo" style="background-color: indigo;"></div>
+                            <div class="tool" data-palette-color="violet" style="background-color: violet;"></div>
+                            <div class="tool" data-palette-color="brown" style="background-color: brown;"></div>
+                            <div class="tool" data-palette-color="black" style="background-color: black;"></div>
+                        </div>
+                    </div>
+
+                </div><!--/#panel-toolbar-->
+
+                <div class="panel" id="panel-workarea">
+                    
+                    <div id="canvas-pattern-wrap">
+                        <section>
+                            
+                            <svg style="width: 100%; height: 100%;" viewBox="0 0 1024 720">
+                                <path data-segment="1" data-segment-alias="star" data-segment-color="yellow"
+                                 style="opacity:1;fill:yellow;fill-opacity:1;stroke:#000000;stroke-width:4.63499594;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+                                 d="M 708.58306,663.70134 C 692.35421,675.37278 531.0957,562.13251 511.10599,562.03582 c -19.98971,-0.0967 -182.33614,111.57829 -198.45133,99.7504 -16.11518,-11.82788 41.7511,-200.187 35.66589,-219.22822 -6.0852,-19.04123 -162.46222,-138.9324 -156.1931,-157.91386 6.26911,-18.98147 203.29095,-22.15354 219.5198,-33.82497 16.22884,-11.67143 81.92896,-197.443232 101.91868,-197.346541 19.98971,0.09669 83.88962,186.495361 100.0048,198.323241 16.11518,11.82789 213.09712,16.90577 219.18232,35.94699 6.0852,19.04123 -151.44431,137.41402 -157.71343,156.39548 -6.26912,18.98147 49.77229,207.89157 33.54344,219.563 z" 
+                                />
+                            </svg>
+                            
+                        </section>
+                    </div><!--/#canvas-pattern-wrap-->
+
+                    <div id="canvas-cardboard-wrap">
+                        
+                        <svg style="width: 100%; height: 100%;" viewBox="0 0 1024 720">
+                            
+                            <path data-segment="1" data-segment-alias="star" data-segment-color="yellow"
+                             style="opacity:1;fill:transparent;fill-opacity:1;stroke:#000000;stroke-width:3.768;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+                             d="M 427.67166,615.80672 C 414.4781,625.29524 283.37981,533.23434 267.12879,533.15573 250.87776,533.07712 118.89502,623.86549 105.79387,614.24978 92.692711,604.63407 139.73623,451.50382 134.78915,436.02388 129.84206,420.54394 2.7122863,323.07605 7.8088897,307.64469 12.905493,292.21334 173.07827,289.63453 186.27183,280.14601 c 13.19357,-9.48852 66.60578,-160.51536 82.85681,-160.43675 16.25102,0.0786 68.19972,151.61507 81.30088,161.23078 13.10115,9.61571 173.24149,13.74388 178.18858,29.22382 4.94708,15.47994 -123.11963,111.71343 -128.21624,127.14479 -5.0966,15.43136 40.46336,169.00954 27.2698,178.49807 z"
+                             inkscape:transform-center-x="-0.40927594"
+                             inkscape:transform-center-y="-25.756879" />
+                            
+                          <rect data-segment="1" data-segment-alias="star" data-segment-color="yellow"
+                             style="opacity:1;fill:transparent;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+                             id="rect4141"
+                             width="410.12192"
+                             height="410.12192"
+                             x="559.62451"
+                             y="158.35518" />
+                            
+                        </svg>
+                        
+                    </div><!--/#canvas-cardboard-wrap-->
+
+                </div><!--/#panel-workarea-->
+
+            </div><!--/#canvas-container-->
+            
+            <div id="splash-guide" class="modal">
+                <div class="sg-box">
+                    <header>
+                        This is how it goes
+                    </header>
+                    <section>
+                        <div class="sg-pointers">
+                            <i class="fa fa-fw fa-paint-brush"></i>
+                            <p>Fill-in all segment(s) of the image from canvas while following the given pattern.</p>
+                        </div>
+                        <div class="sg-pointers">
+                            <i class="fa fa-fw fa-unlock"></i>
+                            <p>
+                                Every canvas level completes at least 
+                                <i class="fa fa-fw fa-star"></i>
+                                <i class="fa fa-fw fa-star-o"></i>
+                                <i class="fa fa-fw fa-star-o"></i>.
+                            </p>
+                        </div>
+                        <div class="sg-pointers">
+                            <i class="fa fa-fw fa-lightbulb-o"></i>
+                            <p>
+                                To get the best score, try fewer color-fill attempts whenever possible.
+                            </p>
+                        </div>
+                    </section>
+                    <div id="dismiss-splash-guide">Let's get started</div>
+                </div><!--/.sg-box-->
+            </div><!--/#splash-guide-->
+            
+            <div id="rating-overlay" class="failed-rating">
+                <div class="ro-box">
+                    
+                    <header>Canvas <span>NOT</span> cleared!</header>
+                    <section class="failed-rating-remarks">
+                        It's okay, you can retry to get at least a star.
+                    </section>
+                    <section class="passed-rating-remarks">
+                        <i class="fa fa-fw fa-star-o"></i>
+                        <i class="fa fa-fw fa-star-o"></i>
+                        <i class="fa fa-fw fa-star-o"></i>
+                    </section>
+                    <footer>
+                        <nav>
+                            <div class="rating-button button">
+                                <i class="fa fa-fw fa-list button"></i>
+                            </div>
+                            <div class="rating-button button">
+                                <i class="fa fa-fw fa-repeat button"></i>
+                            </div>
+                            <div class="rating-button button">
+                                <i class="fa fa-fw fa-forward button"></i>
+                            </div>
+                        </nav>
+                    </footer>
+                </div><!--/.ro-box-->
+            </div><!--/#rating-overlay-->
+
+        </section>
+        
+        <script src="../../../dist/js/lib/jquery-2.1.4.min.js"></script>
+        <script src="../../../dist/js/lib/TweenMax.min.js"></script>
+        <script src="../../js/lib/interact.min.js"></script>
+        <script src="../../js/lib/iscroll.js"></script>
+        
+        <script>
+            
+            window.splashGuide = window.splashGuide ||
+            {
+                init : function(){
+                    //this.config.check();
+                 },
+                
+                animate : function(){
+                    var self = this
+                    ,   splash = $('#splash-guide');
+                    
+                    (new TimelineMax({
+                        delay: 0.5,
+                        onComplete : self.dismissal
+                     }))
+                    .set(splash, {
+                        display : 'block'   
+                     }, 'display')
+                    .to(splash, 0.7, {
+                        autoAlpha : 1,
+                        scale : 1,
+                        ease : Expo.easeInOut
+                     })
+                    
+                    return this;
+                 },
+                
+                dismissal : function(){
+                    var self = this
+                    ,   button = $('#dismiss-splash-guide');
+                    
+                    button.on('click', function(){
+                        TweenMax.to( $('#splash-guide'), 0.7, {
+                            autoAlpha : 0,
+                            scale : 0,
+                            ease : Expo.easeInOut
+                         });
+                     });
+                    
+                    return this;
+                 },
+                
+                config : {
+                    check : function(){
+                        if( true )
+                            splashGuide.animate();
+                        
+                        return this;
+                     }
+                 }
+            };
+            
+            window.splashGuide.init();
+            
+            window.artwork = window.artwork || 
+            {
+                init : function(){
+                    this.defaultActiveTool( true );
+                    this._process.boot();
+                 }, /*-- artwork.init --*/
+                
+                defaultActiveTool : function( bool ){
+                    window.localStorage.setItem('coloring-attempts', $('#canvas-cardboard-wrap').find('[data-segment]').length );
+                    return ( !bool ) ? window.localStorage.removeItem('active-tool') : window.localStorage.setItem( 'active-tool', 'red' );
+                 }, /*-- artwork.defaultActiveTool --*/
+                
+                _process : {
+                    boot : function(){
+                        this.paletteSelection().segment();
+                        this.rate.filter();
+                     },
+                    
+                    o : { 
+                        clear : '__clear__',
+                        save  : '__save__',
+                        rating : {
+                            star : 3,
+                            percentage: 0.8,
+                            precision: 0.2
+                         }
+                     },
+                    
+                    rate : {
+                        filter : function( save, segmentCount, filledCount ){
+                            var self = this;
+                            
+                            segmentCount = $('#canvas-cardboard-wrap').find('[data-segment]').length;
+                            filledCount  = 0;
+                            save = $('[data-palette-misc=save]');
+
+                            save.on('click', function( e ){
+                                filledCount = $('[data-segment-fill]').length;
+                                
+                                /*--
+                                 - Rating is only allowed for completed work
+                                 --*/
+                                ( segmentCount == filledCount ) ? self.proceed( filledCount ) : self.unfilledSegmentAlert( filledCount, segmentCount );
+                                
+                                e.preventDefault();
+                                e.stopImmediatePropagation();
+                             });
+
+                            return this;
+                         },
+                        
+                        unfilledSegmentAlert : function( f, t ){
+                            var self = this
+                            ,   wrap = $('#save-alert')
+                            ,   dom = ''
+                            ,   left = t - f;
+                            
+                            wrap.html('');
+                            dom += ( (left > 1) ? left + ' segments left' : left + ' segment left' );
+                            wrap.html( dom );
+                            
+                            ( new TimelineMax )
+                            .set( wrap, { autoAlpha : 0 })
+                            .to( wrap, 0.3, { autoAlpha : 1 })
+                            .to( wrap, 0.3, { delay: 1, autoAlpha : 0 });
+                            
+                            return this;
+                         },
+                        
+                        proceed : function( total ){
+                            var self = this
+                            ,   percentage = ( $('[data-segment-fill=true]').length / total ) * artwork._process.o.rating.percentage
+                            ,   precision = ( total / window.localStorage.getItem('coloring-attempts') ) * artwork._process.o.rating.precision
+                            ,   actual = percentage + precision
+                            ,   star =  ( actual ) * artwork._process.o.rating.star
+                            ;
+                            
+                            console.log( star );
+                            //--* level clears @ 1+ star rewards
+                            this.ratingOverlay.init( star );
+                            
+                            return this;
+                         },
+                        
+                        ratingOverlay : {
+                    
+                            init : function( star, callback ){
+                                var self = this;
+                                
+                                star = Math.round( star );
+
+                                (new TimelineLite({
+                                    onStart : self.evaluate,
+                                    onStartParams : [ star, callback ],
+                                    onComplete : ( star > 0 ) ? self.animateStars : null,
+                                    onCompleteParams : ( star > 0 ) ? [ star, callback ] : null
+                                 }))
+                                .set('#rating-overlay', { display : 'block' })
+                                .set('.ro-box', { autoAlpha : 0 })
+                                .to('#rating-overlay', 0.5, { autoAlpha:1 })
+                                .to('.ro-box', 0.5, { autoAlpha : 1 })
+                                ;
+
+                                return this;
+                             },
+
+                            evaluate : function( star, cb ){
+
+                                $('#rating-overlay').removeAttr('class')
+                                .addClass( (star > 0) ? 'passed-rating' : 'failed-rating' );
+
+                                if( star < 1 )
+                                    ( typeof cb == 'function' ) ? cb() : null;
+
+                                return this;
+                             },
+
+                            animateStars : function( star, cb ){
+
+                                if( star > 0 ){
+                                    var starsDOM = $('#rating-overlay').find('.fa-star-o')
+                                                   .filter(function(index){
+                                                       return ( index + 1 ) <= star;
+                                                    });
+
+                                    ( new TimelineLite({ 
+                                        delay : 0.2,
+                                        onCompleteScope : ( typeof cb == 'function' ) ? cb() : null
+                                    }) )
+                                    .staggerTo( starsDOM, 1, {
+                                        attr : { 'class' : 'fa fa-fw fa-star' }
+                                     }, 0.5);
+
+                                 }
+
+                                return this;
+                             }
+                            
+                         }
+                        
+                     }, /*-- _process.rate --*/
+                    
+                    paletteSelection : function(){
+                        var self = this
+                        ,   color = $('[data-palette-color]')
+                        ,   clear = $('[data-palette-misc=clear]')
+                        ;
+                        
+                        //--> color palettes
+                        color.on('click', function(){
+                            $(this).addClass('active-palette').siblings('[data-palette-color]').removeClass('active-palette');
+                            clear.removeClass('active-palette');
+                            
+                            window.localStorage.setItem( 'active-tool', $(this).data('palette-color') );
+                         });
+                        
+                        //--> clear palettes
+                        clear.on('click', function(){
+                            $(this).addClass('active-palette');
+                            color.each(function(){
+                                $(this).removeClass('active-palette');    
+                             });
+                            
+                            window.localStorage.setItem( 'active-tool', self.o.clear );
+                         });
+                        
+                        return this;
+                     }, /*-- _process.paletteSelection --*/
+                    
+                    segment : function( cardboard ){
+                        cardboard = $('#canvas-cardboard-wrap');
+                        
+                        var self = this
+                        ,   segment = cardboard.find('[data-segment]')
+                        ;
+                        
+                        segment.each(function(){ // Loop through segment
+                            
+                            $(this).on('click', function(e){ // this clicked segment
+                                var evaluation = null;
+                                
+                                switch( window.localStorage.getItem('active-tool') ){
+                                    
+                                    case self.o.clear:
+                                        //--* decolorize
+                                        $(this).css({
+                                            fill: 'transparent'
+                                         });
+                                        
+                                        //--* remove label
+                                        $(this).removeAttr('data-segment-fill');
+                                    break;
+                                        
+                                    default:
+                                        //--* colorize
+                                        $(this).css({
+                                            fill: window.localStorage.getItem('active-tool')
+                                         });
+                                        
+                                        //--* evaluate user fill against segment's set fill
+                                        if( $(this).data('segment-color') == window.localStorage.getItem('active-tool') ){
+                                            evaluation = true;
+                                         }else{
+                                            evaluation = false;
+                                          }
+                                        
+                                        //--* prevent multiple attempt markings for same color on clipboard
+                                        if( !evaluation && $(this).attr('data-segment-fill-drop') !== window.localStorage.getItem('active-tool') ){
+                                            var attempts = window.localStorage.getItem('coloring-attempts');
+                                            attempts = parseInt( attempts ) + 1;
+                                            window.localStorage.setItem( 'coloring-attempts', attempts );
+                                         }
+                                        
+                                        //--* label evaulation
+                                        $(this).attr({
+                                            'data-segment-fill' : evaluation,
+                                            'data-segment-fill-drop' : window.localStorage.getItem('active-tool')
+                                         });
+                                        
+                                    break;
+                                    
+                                } /*- end switch -*/
+                                
+                             });
+                         });
+                        
+                        return this;
+                     } /*-- _process.segment --*/
+                    
+                 } /*-- artwork._process --*/ 
+                
+                
+            };
+            
+            window.onload = window.artwork.init();
+            
+        </script>
+        
+        <script>
+            var pattern = document.getElementById('canvas-pattern-wrap');
+            
+            interact(pattern)
+            .draggable({
+                restrict : { restriction : 'parent' },
+                inertia : true,
+                autoScroll: true,
+                onmove: function(event){
+                    var target = event.target,
+                    // keep the dragged position in the data-x/data-y attributes
+                    x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+                    y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+                    // translate the element
+                    target.style.webkitTransform =
+                    target.style.transform =
+                      'translate(' + x + 'px, ' + y + 'px)';
+
+                    // update the posiion attributes
+                    target.setAttribute('data-x', x);
+                    target.setAttribute('data-y', y);
+                 }
+             })
+            .resizable({
+                preserveAspectRatio: true,
+                edges: { left: false, right: true, bottom: false, top: false }
+            })
+            .on('resizemove', function (event) {
+                var target = event.target,
+                    x = (parseFloat(target.getAttribute('data-x')) || 0),
+                    y = (parseFloat(target.getAttribute('data-y')) || 0);
+
+                // update the element's style
+                target.style.width  = event.rect.width + 'px';
+                target.style.height = event.rect.height + 'px';
+                
+              });
+            
+            new IScroll('#colour', {
+                mouseWheel : true,
+                click : true
+             });
+            
+            document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+            
+        </script>
+    </body>
+</html>

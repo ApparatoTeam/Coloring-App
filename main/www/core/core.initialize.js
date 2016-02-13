@@ -1,4 +1,12 @@
+/*--
+ - Debug notice:
+ - 1. finish animation line 301
+ - 2. set progress greater than or equal to 100 line 113
+ - 3. auto click started line 101
+ --*/
+
 require( ['require.domReady'], function(domReady){
+    
     /*- param function [callback] -*/
     domReady( function(){
         /*- strict mode -*/
@@ -12,7 +20,8 @@ require( ['require.domReady'], function(domReady){
             init : function(){
                 var self = this;
                 
-                this.api();
+                this._require_base_config();
+                
                 this.preload.intro( function(){
                     TweenMax.to('#home-preloader', 0.2, {
                         autoAlpha : 1,
@@ -24,7 +33,7 @@ require( ['require.domReady'], function(domReady){
                 
              }, /*- end startup.init -*/
             
-            api : function(){
+            _require_base_config : function(){
                 requirejs.config({
                     baseUrl : 'dist',
                     paths : {
@@ -44,17 +53,44 @@ require( ['require.domReady'], function(domReady){
                 
                 done : {
                     init : function(){
+                        //--* create module object
+                        window.app.mod = window.app.mod || { screen : new Object, utils  : new Object };
                         this.animate( this.userEvent() );
                      },
                     
-                    animate : function(){
-                        var tm = new TimelineMax();
+                    animate : function( cb){
+                        var self = this
+                        ,   tm = new TimelineMax({
+                                onComplete : ( typeof cb == 'function' ) ? cb() : null
+                             })
+                        ;
                         
                         requirejs(['js/lib/jquery.lettering'], function(){
                             
-                            $('#home-preloader').before('<div data-button="initiate-app">Start</div>');
-                            
+                            // animate `start-app` button
                             $('[data-button=initiate-app]').lettering();
+                            
+                            // slide-out preloader container
+                            tm
+                            .to( $('#home-header').children('h2').children('span').eq(0), 0.7, {
+                                marginTop: 20
+                             }, 'btn-app-in')
+                            .to( $('#home-header').children('h2').children('span').not(':first'), 0.7, {
+                                margin: '-15px 0',
+                                ease: Expo.easeInOut
+                             }, 'btn-app-in')
+                            .to( $('#home-preloader'), 0.7, {
+                                y : '100%',
+                                autoAlpha: 0,
+                                ease: Expo.easeInOut
+                             }, 'btn-app-in')
+                            .to( $('[data-button=initiate-app]'), 0.3, {
+                                autoAlpha: 1
+                             }, 'btn-app-in+=0.3')
+                            .staggerTo( $('[data-button=initiate-app]').children('span'), 0.2, {
+                                scale: 1
+                             }, 0.1, 'btn-app-in+=0.3')
+                            ;
                             
                          });
                         
@@ -62,14 +98,19 @@ require( ['require.domReady'], function(domReady){
                      },
                     
                     userEvent : function(){
+                        requirejs(['js/initialize']);
                         
+                        $('[data-button=initiate-app]')
+                        .on('click', function( e ){
+                            ( e.originalEvent ) ? requirejs(['js/initialize']) : null ;
+                         });
                      }
                  },
                 
                 /*- 5-second preload rule -*/
                 process : {
                     isRequired : function(){
-                        if( app.startup.preload.progress.step <= 100 ){
+                        if( app.startup.preload.progress.step >= 100 ){
                             this._sysRequirements();
                          }else{
                              app.startup.preload.progress.step = 100;
@@ -89,7 +130,7 @@ require( ['require.domReady'], function(domReady){
                             d : 0.899, // 1.5 * (18/30)
                             f : function(){
                                 
-                                if( parseFloat( ua.match(/Android\s+([\d\.]+)/)[1] ) >= 4.2 ){ /*- passed sys android ver -*/
+                                if( parseFloat( ua.match(/Android\s+([\d\.]+)/)[1] ) >= 4.4 || true){ /*- passed sys android ver -*/
                                     //*--> update node #2
                                     self.updateProgress({
                                         s : 30, 
@@ -115,11 +156,8 @@ require( ['require.domReady'], function(domReady){
                     _screens : function(){
                         var self = this
                         ,   list = [
-                                'text!screen/sc-settings.html',
-                                'text!screen/sc-about.html'
-                                //'sc-category',
-                                //'sc-level',
-                                //'sc-canvas'
+                                'text!screen/settings.html',
+                                'text!screen/about.html'
                             ];
                         
                         requirejs(list, 
@@ -177,28 +215,24 @@ require( ['require.domReady'], function(domReady){
                      },
                     
                     _database : function(){
-                        var self = this
-                        /*- temp cache files -*/
-                        ,   list = [
-                                'text!tmp/tmp.json'
-                            ]
-                        ;
+                        var self = this;
                         
-                        requirejs(list,
-                        function(){
+                        if( 'cache' in window.app ){
                             //*--> update node #5
                             self.updateProgress({
                                 s : app.startup.preload.progress.step + 25,
-                                t : 'Loading cache and database...',
+                                t : 'Loading cache system...',
                                 d : (0.25 * 5),
                                 f : function(){
                                     app.startup.preload.done.init();
                                  }
                              });
-                         },
-                        function(error){
-                            console.log('new user');
-                         });
+                         }else{
+                            self.updateProgress({
+                                t : 'Error: cache system not recognized.',
+                                e : true
+                             });
+                          }
                         
                         return this;
                      },
@@ -221,7 +255,6 @@ require( ['require.domReady'], function(domReady){
                              });
                         
                         setTimeout(function(){
-                            
                             TweenMax.to( o.find('#preloader-progress'), p.d, {
                                 width : p.s+'%',
                                 ease : Linear.easeNone,
@@ -233,10 +266,8 @@ require( ['require.domReady'], function(domReady){
                                         p.f();
                                         console.log('callback...');
                                      }  
-                                        
                                  }
                              });
-                            
                         }, 10);
                         
                         return this;
@@ -253,58 +284,73 @@ require( ['require.domReady'], function(domReady){
                          });
                     
                     timeline
-                    /*- stagger vp bg-*/
-                    .to('#viewport', stagger_bg, {
-                        backgroundColor : '#fa6387',
-                        ease : Bounce.easeInOut
-                     }, 'bg-red')
-                    .to('#viewport', stagger_bg, {
-                        backgroundColor : '#e38af3',
-                        ease : Bounce.easeInOut
-                     }, 'bg-violet')
-                    .to('#viewport', stagger_bg, {
-                        backgroundColor : '#8E8AF3',
-                        ease : Bounce.easeInOut
-                     }, 'bg-blue')
-                    .to('#viewport', stagger_bg, {
-                        backgroundColor : '#55D0FB',
-                        ease : Bounce.easeInOut
-                     }, 'bg-blue-lgt')
-                    .to('#viewport', stagger_bg, {
-                        backgroundColor : '#5bef7e',
-                        ease : Bounce.easeInOut
-                     }, 'bg-green')
-                    .to('#viewport', stagger_bg, {
-                        backgroundColor : '#fff255',
-                        ease : Bounce.easeInOut
-                     }, 'bg-yellow')
-                    .to('#viewport', stagger_bg, {
-                        backgroundColor : '#FFBE44',
-                        ease : Bounce.easeInOut
-                     }, 'bg-orange')
-                    
                     /*- elasticize logo -*/
                     .to( $('#home-header').children('h2'), 0.7, {
-                        scale : 1,
-                        autoAlpha : 1,
-                        ease: Elastic.easeInOut
-                     }, 'bg-blue-lgt')
-                    
+                        autoAlpha : 1
+                     }, 'fade-in-hero')
                     /*- stagger stripes */
                     .staggerTo( $('#home-wallpaper').children('span'), 0.5, {
-                        autoAlpha : 1,
-                        y : '0%'
-                     }, 0.1, 'bg-yellow')
+                        delay: 0.3,
+                        autoAlpha : 0,
+                        y : '-100%'
+                     }, 0.1, 'stagger-stripes')
                     ;
                     
                     /*- temp -*/
                     timeline.progress(1);
                     
                  } /*- end startup.preload.intro -*/
-                
              } /*- end startup.preload -*/
-            
-         };
+         }; /*- end window.app.startup -*/
+        
+        window.app.cache = function(p){
+            if('localStorage' in window ){
+                switch( typeof p ){
+                    case 'object':
+                        var key
+                        ,   timeout = 0
+                        ,   increment = 10;
+
+                        for( key in p ){
+                            if( key != 'callback' && key != '--remove' ){
+                                window.localStorage.setItem(key, p[key]);
+                                timeout += increment;
+                             }
+                         }
+
+                        if( typeof p.callback == 'function' && p.callback !== undefined)
+                            window.setTimeout( p.callback, timeout );
+
+                        break;
+
+                    case 'string':
+                        if( p == '--all' ){
+                            var i = 0
+                            ,   obj = {};
+                            for( i; i < localStorage.length; i++ ){
+                                obj[localStorage.key(i)] = localStorage.getItem( localStorage.key(i) );
+                                timeout += increment;
+                             }
+
+                            return obj;
+                         }else{
+                            if( window.localStorage.getItem( p ) != null){
+                                 return window.localStorage.getItem( p );
+                                timeout+=increment;
+                             }else{
+                                console.warn('LocalStorage: index not found for \''+p+'\'');
+                                 timeout = 0;
+                                return;
+                              }
+                         }
+
+                        break;
+                 }
+             }else{
+                 alert('Internal error: cache system failed');
+                 return;
+              }
+         } /*- end window.app.cache -*/
         
         /*- initialize startup app -*/
         window.app.startup.init();
