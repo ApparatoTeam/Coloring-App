@@ -318,16 +318,12 @@ function( pageShift, navButton, canvasParser, __a ){
                         ,   precision = ( total / window.localStorage.getItem('coloring-attempts') ) * __a.artwork._process.o.rating.precision
                         ,   actual = percentage + precision
                         ,   star =  ( actual ) * __a.artwork._process.o.rating.star
+                        ,   saved_to_id = (/\d+\d+\d/g).exec(localStorage.getItem('active-canvas-specs'))[0]
                         ;
 
                         console.log( star );
                         //--* level clears @ 1+ star rewards
-                        this.ratingOverlay.init( star, function(){
-                            self.ratingOverlay.cache( 
-                                ( (/\d+\d+\d/g).exec(localStorage.getItem('active-canvas-specs'))[0] ),
-                                star 
-                             );
-                         });
+                        this.ratingOverlay.init( star, self.ratingOverlay.cache(saved_to_id, star) );
 
                         return this;
                      },
@@ -362,13 +358,13 @@ function( pageShift, navButton, canvasParser, __a ){
                             ,   regex = new RegExp(pattern, 'g')
                             ,   str = localStorage.getItem('canvas')
                             ,   token = regex.exec(str)[0]
-                            ,   modified = token.replace(/"best-score":2/g, '"best-score":'+star)
+                            ,   modified = token.replace(/"best-score":\d/g, '"best-score":'+star)
                             ,   merged = str.replace(regex, modified);
-                            
-                            console.log(merged);
                             
                             window.app.cache({
                                 canvas : merged
+                            }, function(){
+                                console.log('Saved.');
                              });
                             
                          },
