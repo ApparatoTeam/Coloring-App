@@ -318,8 +318,8 @@ define([ window.app.__c__.pageShift ],  function( pageShift,  __a ){
                         init : function( star, callback ){
                             var self = this;
 
-                            //star = Math.round( star );
-                            star = Math.ceil( star );
+                            star = Math.round( star );
+                            //star = Math.ceil( star );
 
                             (new TimelineLite({
                                 onStart : self.evaluate,
@@ -359,6 +359,8 @@ define([ window.app.__c__.pageShift ],  function( pageShift,  __a ){
                                 callback : function( index ){
                                     
                                     index = parseInt(self.index) + 1;
+                                    
+                                    if(index > 20) return;
                                     
                                     console.log( index );
                                     
