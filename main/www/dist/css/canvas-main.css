@@ -175,7 +175,7 @@
     
     width: 95%;
     height: 90%;
-    background-color: white;
+    background-color: #eaeaea;
     
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
@@ -424,7 +424,7 @@
 }
 
 [data-screen="canvas-main"] #rating-overlay .ro-box section{
-    margin: 20px auto;
+    margin: 4.45% auto;
     display: none;
 }
 
@@ -435,6 +435,12 @@
 }
 
 /*- rating overlay action buttons -*/
+[data-screen="canvas-main"] #rating-overlay-control{
+    opacity: 0;
+    -webkit-visibility: hidden;
+    visibility: hidden;
+}
+
 [data-screen="canvas-main"] #rating-overlay nav{
     position: relative;
     display: block;
@@ -477,7 +483,8 @@
 }
 
 [data-screen="canvas-main"] #rating-overlay.passed-rating nav{
-    width: calc((60px + 5px + 18px) * 3);
+    /*-width: calc((60px + 5px + 18px) * 3);-*/
+    width: calc((60px + 5px + 17px) * 2);
 }
 
 [data-screen="canvas-main"] #rating-overlay.passed-rating .rating-button:last-of-type{
@@ -506,8 +513,44 @@
     width: calc((60px + 5px + 17px) * 2);
 }
 
-[data-screen="canvas-main"] #rating-overlay.failed-rating .rating-button:last-of-type{
+[data-screen="canvas-main"] #rating-overlay.failed-rating .rating-button:nth-of-type(3){
     display: none;
     -webkit-visibility: hidden;
     visibility: hidden;
 }
+
+/*--
+ - Canvas main preloader interface
+ --*/
+[data-screen="screen-preloader"]{
+    background-color: #555;
+}
+
+[data-screen="screen-preloader"] #canvas-container {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 50px);
+    z-index: 1;
+}
+
+[data-screen="screen-preloader"] header{
+    position: absolute;
+    top: calc(50% + 5%);
+    display: block;
+    color: white;
+    width: 100%;
+    text-align: center;
+    font: 30px/100% 'pacificoregular';
+}
+
+[data-screen="screen-preloader"] .fa-spin{
+    position: absolute;
+    top: calc(50% - 25px);
+    left: calc(50% - 25px);
+    display: block;
+    color: white;
+    font-size: 50px;
+}
+
+
+

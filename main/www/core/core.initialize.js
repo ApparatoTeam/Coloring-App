@@ -15,6 +15,9 @@ require( ['require.domReady'], function(domReady){
         /*- Build Application main namespace object -*/
         window.app = window.app || new Object;
         
+        /*- Create path constants -*/
+        window.app.__c__ = window.app.__c__ || { pageShift : 'js/mod/utils/page-shift', preloader : 'js/mod/utils/screen-preloader' };
+        
         window.app.startup = {
             
             init : function(){
@@ -98,8 +101,10 @@ require( ['require.domReady'], function(domReady){
                      },
                     
                     userEvent : function(){
-                        requirejs(['js/initialize']);
+                        /*-- temp auto initiate 
+                        requirejs(['js/initialize']);--*/
                         
+                        /*-- user starts --*/
                         $('[data-button=initiate-app]')
                         .on('click', function( e ){
                             ( e.originalEvent ) ? requirejs(['js/initialize']) : null ;
@@ -110,7 +115,7 @@ require( ['require.domReady'], function(domReady){
                 /*- 5-second preload rule -*/
                 process : {
                     isRequired : function(){
-                        if( app.startup.preload.progress.step >= 100 ){
+                        if( app.startup.preload.progress.step <= 100 ){
                             this._sysRequirements();
                          }else{
                              app.startup.preload.progress.step = 100;
@@ -264,7 +269,7 @@ require( ['require.domReady'], function(domReady){
                                 onComplete : function(){
                                     if( ( typeof p.f ).match(/function/) ){
                                         p.f();
-                                        console.log('callback...');
+                                        //console.log('callback...');
                                      }  
                                  }
                              });
@@ -296,12 +301,48 @@ require( ['require.domReady'], function(domReady){
                      }, 0.1, 'stagger-stripes')
                     ;
                     
-                    /*- temp -*/
+                    /*- temp 
                     timeline.progress(1);
+                    -*/
                     
                  } /*- end startup.preload.intro -*/
              } /*- end startup.preload -*/
          }; /*- end window.app.startup -*/
+        
+        window.app.navigation = {
+            init : function(){
+                this.stage();
+             },
+
+            stage : function( buttons ){
+                buttons = $('[data-navigate]');
+
+                buttons.each(function(){
+                    $(this).on('click', function( e ){
+                        var navigate = $(this).data('navigate')
+                        ,   __path__ = 'js/mod/screen/' + navigate;
+
+                        //require.undef( window.app.__c__.pageShift );
+                        require.undef(__path__);
+                        
+                        // activate canvas list screen
+                        requirejs([window.app.__c__.preloader], function( obj ){
+                            obj.activate({
+                                screen : navigate,
+                                duration : 0.1
+                             });
+                         });
+
+                        $(this).off('click');
+
+                        e.stopImmediatePropagation();
+                        e.preventDefault();
+                     });
+                 });
+
+                return this;
+             },
+         }; /*- end window.app.navigation -*/
         
         window.app.cache = function(p){
             if('localStorage' in window ){
@@ -352,7 +393,9 @@ require( ['require.domReady'], function(domReady){
               }
          } /*- end window.app.cache -*/
         
-        /*- initialize startup app -*/
+        /*---
+         - Initialize startup app 
+         --*/
         window.app.startup.init();
         
      });

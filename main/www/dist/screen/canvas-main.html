@@ -1,17 +1,17 @@
 <section data-screen="canvas-main" data-ease-from="bottom">
 
     <div id="navigation">
-        <div id="nav-button-home" class="nav-button">
+        <div id="nav-button-home" data-navigate="index" class="nav-button">
             <i class="fa fa-fw fa-home fa-2x button"></i>
         </div>
 
         <div id="nav-page-header">
-            <span id="canvas-name">Monkey</span>
-            <span id="canvas-category">Animals</span>
+            <span id="canvas-name">---</span>
+            <span id="canvas-category">---</span>
         </div>
 
         <div id="nav-button-stats" data-navigate="canvas-list" class="nav-button">
-            <i class="fa fa-fw fa-th-list button"></i>
+            <i class="fa fa-fw fa-list button"></i>
         </div>
 
     </div><!--/#navigation-->
@@ -40,12 +40,17 @@
                     <div class="tool" data-palette-color="red" style="background-color: red;"></div>
                     <div class="tool" data-palette-color="orange" style="background-color: orange;"></div>
                     <div class="tool" data-palette-color="yellow" style="background-color: yellow;"></div>
+                    <div class="tool" data-palette-color="gold" style="background-color: gold;"></div>
                     <div class="tool" data-palette-color="green" style="background-color: green;"></div>
                     <div class="tool" data-palette-color="blue" style="background-color: blue;"></div>
+                    <div class="tool" data-palette-color="aliceblue" style="background-color: aliceblue;"></div>
                     <div class="tool" data-palette-color="indigo" style="background-color: indigo;"></div>
                     <div class="tool" data-palette-color="violet" style="background-color: violet;"></div>
+                    <div class="tool" data-palette-color="pink" style="background-color: pink;"></div>
                     <div class="tool" data-palette-color="brown" style="background-color: brown;"></div>
+                    <div class="tool" data-palette-color="burlywood" style="background-color: burlywood;"></div>
                     <div class="tool" data-palette-color="black" style="background-color: black;"></div>
+                    <div class="tool" data-palette-color="white" style="background-color: white;"></div>
                 </div>
             </div>
 
@@ -54,14 +59,10 @@
         <div class="panel" id="panel-workarea">
 
             <div id="canvas-pattern-wrap">
-                <section>
-
-                </section>
+                <section> </section>
             </div><!--/#canvas-pattern-wrap-->
 
-            <div id="canvas-cardboard-wrap">
-
-            </div><!--/#canvas-cardboard-wrap-->
+            <div id="canvas-cardboard-wrap"> </div><!--/#canvas-cardboard-wrap-->
 
         </div><!--/#panel-workarea-->
 
@@ -109,17 +110,19 @@
                 <i class="fa fa-fw fa-star-o"></i>
                 <i class="fa fa-fw fa-star-o"></i>
             </section>
-            <footer>
+            <footer id="rating-overlay-control">
                 <nav>
-                    <div class="rating-button button">
-                        <i class="fa fa-fw fa-list button"></i>
+                    <div class="rating-button button" data-navigate="canvas-list">
+                        <i class="fa fa-fw fa-list"></i>
                     </div>
-                    <div class="rating-button button">
-                        <i class="fa fa-fw fa-repeat button"></i>
+                    <div class="rating-button button" data-rating-control="retry">
+                        <i class="fa fa-fw fa-repeat"></i>
                     </div>
-                    <div class="rating-button button">
-                        <i class="fa fa-fw fa-forward button"></i>
+                    <!--
+                    <div class="rating-button button" data-rating-control="next">
+                        <i class="fa fa-fw fa-forward"></i>
                     </div>
+                    -->
                 </nav>
             </footer>
         </div><!--/.ro-box-->

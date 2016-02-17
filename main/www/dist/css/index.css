@@ -1,0 +1,9 @@
+[data-screen="index"] h2.index-shown-h2,
+[data-screen="index"] h2.index-shown-h2 [data-button="initiate-app"]{
+    opacity: 1;
+    visibility: visible;
+}
+
+[data-screen="index"] h2.index-shown-h2 > span{
+    margin: -15px 0;
+}

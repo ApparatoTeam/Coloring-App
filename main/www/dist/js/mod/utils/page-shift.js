@@ -6,11 +6,13 @@ define([], function( __a ){
     return __a = {
             
         OBJ : {
+            pre : function(){},
             data : function(){}
          },
         
         set : function( param ){
             this.OBJ = param;
+            //this.OBJ.pre();
             this.get();
             
             return this;
@@ -51,26 +53,29 @@ define([], function( __a ){
                         ease : Expo.easeInOut,
                         onStart : function(){
                             
-                            obj.data();
-                            
                             window.setTimeout( function(){
-                                TweenMax.to( element.prev('[data-screen]'), 0.5, {
+                                TweenMax.to( element.siblings('[data-screen]'), 0.5, {
                                     autoAlpha : 0,
                                     onComplete : function(){
-                                        element.prev('[data-screen]').remove();        
+                                        element.siblings('[data-screen]').remove();        
                                      }
                                  });
-                             }, 250 );
-                         }
+                             }, 0 );
+                         },
+                    
+                        onComplete : obj.data
                      }
                 ,   trx_fin = {}
                 ;
 
                 if( direction.match(/top/) || direction.match(/bottom/) )
-                    trx_par = { y : '0%' }
+                    trx_par = { y : '0%' };
 
                 if( direction.match(/right/) || direction.match(/left/) )
-                    trx_par = { x : '0%' }
+                    trx_par = { x : '0%' };
+                    
+                if( direction.match(/fade/) )
+                    trx_par = { autoAlpha : 1 };
 
                 trx_fin = $.extend({}, trx_def, trx_par);
 

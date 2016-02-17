@@ -3,6 +3,7 @@
         
         {
             "name" : "beginner",
+            "index": 1,
             "alias": "shapes",
             "theme": "#FFE002",
             "items" : [
@@ -28,7 +29,7 @@
                     "index"  : 3,
                     "locked" : false,
                     "source" : "img/canvas/shapes/square.svg",
-                    "best-score" : 2
+                    "best-score" : 3
                 },
                 {
                     "code": "004",
@@ -36,7 +37,7 @@
                     "index"  : 4,
                     "locked" : false,
                     "source" : "img/canvas/shapes/oval.svg",
-                    "best-score" : 1
+                    "best-score" : 3
                 },
                 {
                     "code": "005",
@@ -51,38 +52,147 @@
         
         {
             "name" : "intermmediate",
+            "index": 2,
             "alias": "animals",
             "theme" : "#BFFF42",
             "items" : [
                 {
                     "code": "001",
                     "name"   : "chicken",
-                    "index"  : 1,
-                    "locked" : false
+                    "index"  : 6,
+                    "locked" : false,
+                    "source" : "img/canvas/animals/chicken.svg",
+                    "best-score" : 0
                 },
                 {
                     "code": "002",
-                    "name"   : "pig",
-                    "index"  : 2,
-                    "locked" : true
+                    "name"   : "fish",
+                    "index"  : 7,
+                    "locked" : true,
+                    "source" : "img/canvas/animals/fish.svg",
+                    "best-score" : 0
                 },
                 {
                     "code": "003",
-                    "name"   : "frog",
-                    "index"  : 3,
-                    "locked" : true
+                    "name"   : "dog",
+                    "index"  : 8,
+                    "locked" : true,
+                    "source" : "img/canvas/animals/dog.svg",
+                    "best-score" : 0
                 },
                 {
                     "code": "004",
-                    "name"   : "dog",
-                    "index"  : 4,
-                    "locked" : true
+                    "name"   : "penguin",
+                    "index"  : 9,
+                    "locked" : true,
+                    "source" : "img/canvas/animals/penguin.svg",
+                    "best-score" : 0
                 },
                 {
                     "code": "005",
-                    "name"   : "cat",
-                    "index"  : 5,
-                    "locked" : true
+                    "name"   : "crab",
+                    "index"  : 10,
+                    "locked" : true,
+                    "source" : "img/canvas/animals/crab.svg",
+                    "best-score" : 0
+                }
+            ]
+        },
+        
+        {
+            "name" : "advanced",
+            "index": 3,
+            "alias": "objects",
+            "theme" : "#f75656",
+            "items" : [
+                {
+                    "code": "001",
+                    "name"   : "lollipop",
+                    "index"  : 11,
+                    "locked" : true,
+                    "source" : "img/canvas/objects/lollipop.svg",
+                    "best-score" : 0
+                },
+                {
+                    "code": "002",
+                    "name"   : "flower",
+                    "index"  : 12,
+                    "locked" : true,
+                    "source" : "img/canvas/objects/flower.svg",
+                    "best-score" : 0
+                },
+                {
+                    "code": "003",
+                    "name"   : "umbrella",
+                    "index"  : 13,
+                    "locked" : true,
+                    "source" : "img/canvas/objects/umbrella.svg",
+                    "best-score" : 0
+                },
+                {
+                    "code": "004",
+                    "name"   : "house",
+                    "index"  : 14,
+                    "locked" : true,
+                    "source" : "img/canvas/objects/house.svg",
+                    "best-score" : 0
+                },
+                {
+                    "code": "005",
+                    "name"   : "airplane",
+                    "index"  : 15,
+                    "locked" : true,
+                    "source" : "img/canvas/objects/airplane.svg",
+                    "best-score" : 0
+                }
+            ]
+        },
+        
+        {
+            "name" : "expert",
+            "index": 4,
+            "alias": "disney",
+            "theme" : "#59E3EF",
+            "items" : [
+                {
+                    "code": "001",
+                    "name"   : "mickey",
+                    "index"  : 16,
+                    "locked" : false,
+                    "source" : "img/canvas/disney/mickey.svg",
+                    "best-score" : 0
+                },
+                {
+                    "code": "002",
+                    "name"   : "dumbo",
+                    "index"  : 17,
+                    "locked" : false,
+                    "source" : "img/canvas/disney/dumbo.svg",
+                    "best-score" : 0
+                },
+                {
+                    "code": "003",
+                    "name"   : "pooh",
+                    "index"  : 18,
+                    "locked" : false,
+                    "source" : "img/canvas/disney/pooh.svg",
+                    "best-score" : 0
+                },
+                {
+                    "code": "004",
+                    "name"   : "phineas",
+                    "index"  : 19,
+                    "locked" : false,
+                    "source" : "img/canvas/disney/phineas.svg",
+                    "best-score" : 0
+                },
+                {
+                    "code": "005",
+                    "name"   : "pluto",
+                    "index"  : 19,
+                    "locked" : false,
+                    "source" : "img/canvas/disney/pluto.svg",
+                    "best-score" : 0
                 }
             ]
         }

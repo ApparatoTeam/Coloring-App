@@ -1,4 +1,4 @@
-define([ 'js/mod/screen/canvas-list' ], function( canvasList ){
+requirejs([ 'js/mod/screen/canvas-list' ], function( canvasList ){
     
     //--> Load screen modules
     window.app.mod.bootstrap = {
@@ -10,12 +10,14 @@ define([ 'js/mod/screen/canvas-list' ], function( canvasList ){
         modules : function(){
             
             // mark the progress on list first-run, default
-            window.app.cache({
-                'progress' : 'beginner--shapes--001'
-             });
+            window.app.cache({ tracker : 1 });
             
             // activate canvas list screen
-            canvasList.activate();
+            requirejs([window.app.__c__.preloader], function( obj ){
+                obj.activate({
+                    screen : 'canvas-list'
+                 });
+             });
             
          }, /*- end bootstrap._canvas -*/
 

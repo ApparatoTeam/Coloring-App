@@ -1,18 +1,17 @@
-define(['js/mod/utils/page-shift', 'js/mod/utils/navigation-button'], function( pageShift, navButton, __a ){
+define([ window.app.__c__.pageShift ], function( pageShift, __a ){
     
-    window.app.mod.screen.canvas = null;
     __a = window.app.mod.screen.canvas;
     
-    return __a = {
+    __a = {
         
-        activate : function(){
+        activate : function( self ){
+            self = this;
             
             pageShift.set({
                 name : 'canvas-list',
                 data : function(){
-                    /*-- [site-wide protocol] allow navigation controls --*/
-                    //navButton.get();
-                    __a.parseDatabase.init();
+                    window.app.navigation.init();
+                    self.parseDatabase.init();
                  }
              });
             
@@ -59,7 +58,7 @@ define(['js/mod/utils/page-shift', 'js/mod/utils/navigation-button'], function( 
 
                         for( var L2 = 0; L2 < canvasArrayL2.length; L2++ ){
 
-                            if( canvasArrayL2[L2].code == ( localStorage.getItem('active-canvas-specs') ).split('--')[2] ){
+                            if( canvasArrayL2[L2]['code'] == ( localStorage.getItem('active-canvas-specs') ).split('--')[2] ){
 
                                 //--> [UI] label canvas name
                                 self.headerLabel( canvasArrayL2[L2].name, 'name' );
@@ -78,11 +77,12 @@ define(['js/mod/utils/page-shift', 'js/mod/utils/navigation-button'], function( 
              },
             
             
-         }, /*-- end tileDetailPresentation --*/
+         }, /*-- end list --*/
         
         selection : {
             tap : function(){
-                var self = this;
+                var self = this
+                ,   categoryIndex = 0;
                 
                 // remove active canvas when displaying list
                 localStorage.removeItem('active-canvas-specs');
@@ -91,10 +91,14 @@ define(['js/mod/utils/page-shift', 'js/mod/utils/navigation-button'], function( 
                     
                     $(this).on('click', function( e ){
                         
+                        categoryIndex = ($(this).parent().parent()).index();
+                        
+                        //console.log( categoryIndex );
+                        
                         /*- check if locked or not -*/
                         if( $(this).hasClass('canvas-tiles-unlocked') ){ // unlocked tiles
                             
-                            self.redirect( ( $(this).data('canvas-domain-level') + '--' + $(this).data('canvas-domain-alias') + '--' + $(this).data('canvas-code') ) );
+                            self.redirect( ( $(this).data('canvas-domain-level') + '--' + $(this).data('canvas-domain-alias') + '--' + $(this).data('canvas-code') + '--' + categoryIndex ) );
                             // disable multiple taps on same canvas instance
                             $(this).attr('disabled', 'disabled');
                             
@@ -119,8 +123,11 @@ define(['js/mod/utils/page-shift', 'js/mod/utils/navigation-button'], function( 
                 window.app.cache({
                     'active-canvas-specs' : code,
                     callback : function(){
-                        requirejs(['js/mod/screen/canvas-main'], function( canvasMain ){
-                            canvasMain.activate();
+                        requirejs([window.app.__c__.preloader], function( obj ){
+                            obj.activate({
+                                screen : 'canvas-main',
+                                label  : 'canvas'
+                             });
                          });
                      }
                  });
@@ -179,6 +186,7 @@ define(['js/mod/utils/page-shift', 'js/mod/utils/navigation-button'], function( 
              },
             
             read : function(canvasArray, container, dom){
+                var self = this;
                 
                 canvasArray = JSON.parse( window.app.cache('canvas') );
                 container = $('#canvas-container')
@@ -195,7 +203,7 @@ define(['js/mod/utils/page-shift', 'js/mod/utils/navigation-button'], function( 
                         dom += '<section class="canvas-tiles-wrap">';
                         /*- loop through canvas level items -*/
                         for( var b=0; b<(canvasArray[a].items).length; b++ ){
-                            dom += '<div data-canvas-domain-level="'+canvasArray[a].name+'" data-canvas-domain-alias="'+canvasArray[a].alias+'" data-canvas-code="'+(canvasArray[a].items)[b]['code']+'" class="canvas-tiles canvas-tiles-'+ ( ( (canvasArray[a].items)[b]['locked'] == true ) ? 'locked' : 'unlocked') +'">';
+                            dom += '<div data-canvas-domain-level="'+canvasArray[a].name+'" data-canvas-domain-alias="'+canvasArray[a].alias+'" data-canvas-code="'+(canvasArray[a].items)[b]['index']+'" class="canvas-tiles canvas-tiles-'+ ( ( (canvasArray[a].items)[b]['locked'] == true ) ? 'locked' : 'unlocked') +'">';
                                 
                                 if( ! (canvasArray[a].items)[b]['locked'] ){
                                     dom += '<div class="tile-pri-specs">';
@@ -217,12 +225,27 @@ define(['js/mod/utils/page-shift', 'js/mod/utils/navigation-button'], function( 
                  }
                 /*- end loop -*/
                                 
-                container.html('').append(dom);
+                container.html( dom );
                 
                 // allow AMD 
                 __a.AMD.init();
                 // allow user-interaction with
                 __a.selection.tap();
+                
+                TweenMax.to('#canvas-list', 0.7, {
+                    autoAlpha : 1,
+                    onComplete : function(){
+                        self.unlock();
+                     }    
+                 });
+                
+                return this;
+             },
+            
+            unlock : function(){
+                var self = this;
+                
+                
                 
                 return this;
              }
@@ -230,5 +253,6 @@ define(['js/mod/utils/page-shift', 'js/mod/utils/navigation-button'], function( 
          } /*-- end parseDatabase --*/
      };
     
-    //return window.app.mod.screen.canvas;
+    return __a;
+    
 });

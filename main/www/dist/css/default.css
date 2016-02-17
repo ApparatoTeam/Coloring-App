@@ -12,6 +12,12 @@
     height: 100%;
 }
 
+#viewport > [data-ease-from="fade"]{
+    opacity: 0;
+    -webkit-visibility: hidden;
+    visibility: hidden;
+}
+
 #viewport > [data-ease-from="center"]{
     -webkit-transform: translateX(0%);
     transform: translateX(0%);

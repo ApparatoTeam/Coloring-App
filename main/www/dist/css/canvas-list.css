@@ -11,6 +11,9 @@
 #canvas-list{
     position: relative;
     height: calc(100% - 50px);
+    
+    opacity: 0;
+    visibility: hidden;
 }
 
 #canvas-list .swiper-container{
@@ -145,11 +148,11 @@
 }
 
 [data-canvas-level="advanced"] .canvas-tiles-wrap .canvas-tiles{
-    background-color: #59E3EF;
+    background-color: #f75656;
 }
 
 [data-canvas-level="expert"] .canvas-tiles-wrap .canvas-tiles{
-    background-color: #f75656;
+    background-color: #59E3EF;
 }
 
 /*--

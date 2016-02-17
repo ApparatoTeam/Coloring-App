@@ -15,3 +15,6 @@
 
 /*-- include canvas main screen --*/
 @import url(canvas-main.css);
+
+/*-- include index [2] screen --*/
+@import url(index.css);

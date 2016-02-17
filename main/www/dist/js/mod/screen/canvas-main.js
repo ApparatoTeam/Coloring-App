@@ -1,6 +1,4 @@
-define(['js/mod/utils/page-shift', 'js/mod/utils/navigation-button', 'js/mod/utils/canvas-parser'], 
-       
-function( pageShift, navButton, canvasParser, __a ){
+define([ window.app.__c__.pageShift ],  function( pageShift,  __a ){
     
     window.app.mod.screen.canvasMain = null;
     __a = window.app.mod.screen.canvasMain;
@@ -14,6 +12,8 @@ function( pageShift, navButton, canvasParser, __a ){
                 name : 'canvas-main',
                 data : function(){
                     
+                    window.app.navigation.init();
+                    
                     self.AMD.init();
                     
                     self.parseData.init();
@@ -24,9 +24,6 @@ function( pageShift, navButton, canvasParser, __a ){
                     window.setTimeout(function(){
                         self.artwork.init();
                      }, 100 );
-                    
-                    self.navigation.start();
-                    
                  }
              });
             
@@ -57,7 +54,7 @@ function( pageShift, navButton, canvasParser, __a ){
                         
                         for( var L2 = 0; L2 < canvasArrayL2.length; L2++ ){
                             
-                            if( canvasArrayL2[L2].code == ( localStorage.getItem('active-canvas-specs') ).split('--')[2] ){
+                            if( canvasArrayL2[L2]['index'] == ( localStorage.getItem('active-canvas-specs') ).split('--')[2] ){
                                 
                                 //--> [UI] label canvas name
                                 self.headerLabel( canvasArrayL2[L2].name, 'name' );
@@ -93,8 +90,8 @@ function( pageShift, navButton, canvasParser, __a ){
             
             theme : function( color ){
                 
-                $('#canvas-category').css({ color : color });
-                $('[data-navigate="canvas-list"]').children('.fa').css({ backgroundColor : color });
+                $('#navigation').find('#canvas-category').css({ color : color });
+                $('#navigation').find('[data-navigate="canvas-list"]').children('.fa').css({ backgroundColor : color });
                 
              },
             
@@ -230,19 +227,6 @@ function( pageShift, navButton, canvasParser, __a ){
             
          }, /*-- end AMD --*/
         
-        navigation : {
-            nav : $('#navigation'),
-            
-            start : function(){
-                console.log();
-                this.nav.find('#nav-button-stats').on('click', function(){
-                    alert( $(this).data('navigate') );    
-                 });
-                
-             }
-            
-         }, /*-- end navigation --*/
-        
         artwork : {
             init : function(){
                 this.defaultActiveTool( true );
@@ -318,10 +302,10 @@ function( pageShift, navButton, canvasParser, __a ){
                         ,   precision = ( total / window.localStorage.getItem('coloring-attempts') ) * __a.artwork._process.o.rating.precision
                         ,   actual = percentage + precision
                         ,   star =  ( actual ) * __a.artwork._process.o.rating.star
-                        ,   saved_to_id = (/\d+\d+\d/g).exec(localStorage.getItem('active-canvas-specs'))[0]
+                        ,   saved_to_id = (localStorage.getItem('active-canvas-specs')).split('--')[2]
                         ;
 
-                        console.log( star );
+                        //console.log( star );
                         //--* level clears @ 1+ star rewards
                         this.ratingOverlay.init( star, self.ratingOverlay.cache(saved_to_id, star) );
 
@@ -329,11 +313,13 @@ function( pageShift, navButton, canvasParser, __a ){
                      },
 
                     ratingOverlay : {
+                        index : 0,
 
                         init : function( star, callback ){
                             var self = this;
 
-                            star = Math.round( star );
+                            //star = Math.round( star );
+                            star = Math.ceil( star );
 
                             (new TimelineLite({
                                 onStart : self.evaluate,
@@ -350,11 +336,18 @@ function( pageShift, navButton, canvasParser, __a ){
                             return this;
                          },
                         
-                        cache : function( code, star ){
-                            //code = JSON.stringify( code );
-                            star = Math.round(star);
+                        cache : function( index, star ){
+                            this.index = index;
                             
-                            var pattern = '{"code":"'+code+'","name":"\\w+","index":\\d+,"locked":(true|false),"source":"img\/canvas\/\\w+\/\\w+\\.svg","best-score":[0-3]}'
+                            star = Math.round(star);
+                            var self = this;
+                            
+                            self.controls.set();
+                            
+                            if( star < 1 )
+                                return;
+                            
+                            var pattern = '{"code":"\\d+\\d+\\d+","name":"\\w+","index":'+index+',"locked":(true|false),"source":"img\/canvas\/\\w+\/\\w+\\.svg","best-score":[0-3]}'
                             ,   regex = new RegExp(pattern, 'g')
                             ,   str = localStorage.getItem('canvas')
                             ,   token = regex.exec(str)[0]
@@ -362,9 +355,23 @@ function( pageShift, navButton, canvasParser, __a ){
                             ,   merged = str.replace(regex, modified);
                             
                             window.app.cache({
-                                canvas : merged
-                            }, function(){
-                                console.log('Saved.');
+                                canvas : merged,
+                                callback : function( index ){
+                                    
+                                    index = parseInt(self.index) + 1;
+                                    
+                                    console.log( index );
+                                    
+                                    var pattern = '{"code":"\\d+\\d+\\d+","name":"\\w+","index":'+index+',"locked":(true|false),"source":"img\/canvas\/\\w+\/\\w+\\.svg","best-score":[0-3]}'
+                                    ,   regex = new RegExp(pattern, 'g')
+                                    ,   str = localStorage.getItem('canvas')
+                                    ,   token = regex.exec(str)[0]
+                                    ,   modified = token.replace(/"locked":(true|false)/g, '"locked":false')
+                                    ,   merged = str.replace(regex, modified);
+                                    
+                                    window.app.cache({ canvas : merged });
+                                    
+                                 }
                              });
                             
                          },
@@ -399,6 +406,76 @@ function( pageShift, navButton, canvasParser, __a ){
                              }
 
                             return this;
+                         },
+                        
+                        controls : {
+                            set : function( nav, self ){
+                                self = this;
+                                
+                                nav = $('#rating-overlay-control').find('[data-rating-control]');
+
+                                TweenMax.to( $('#rating-overlay-control'), 0.3, {
+                                    autoAlpha : 1
+                                 });
+
+                                nav.each(function(){
+                                    $(this).on('click',  ( ( $(this).data('rating-control') === 'retry' ) ? self.retry : self.next ) );
+                                 });
+
+                                return this;
+                              },
+                            
+                            retry : function(){
+                                requirejs([ window.app.__c__.preloader ], function( obj ){
+                                    obj.activate({
+                                        screen : 'canvas-main'
+                                     });
+                                 });
+                                
+                                return;
+                             },
+                            
+                            next : function( self ){
+                                self = this;
+                                
+                                var handler = window.localStorage.getItem('active-canvas-specs')
+                                ,   categoryIndex = parseInt(handler.split('--')[3])
+                                ,   tileIndex = parseInt(handler.split('--')[2])
+                                ,   obj = JSON.parse( window.localStorage.getItem('canvas') )
+                                ,   cache = '';
+                                
+                                // alias--name--tileIndex--categoryIndex
+                                
+                                tileIndex+=1;    
+                                if( tileIndex >= 5 ){
+                                    tileIndex = 0;
+                                    
+                                    categoryIndex+=1;
+                                    if( categoryIndex >= 5){
+                                        
+                                        categoryIndex = 0;
+                                     }
+                                }
+                                
+                                cache = obj[categoryIndex]['name'] + '--';
+                                cache += obj[categoryIndex]['alias'] + '--';
+                                cache += tileIndex + '--';
+                                cache += categoryIndex;
+                                
+                                window.app.cache({
+                                    'active-canvas-specs' : cache,
+                                    callback : function(){
+                                        requirejs([ window.app.__c__.preloader ], function( obj ){
+                                            obj.activate({
+                                                screen : 'canvas-main'
+                                             });
+                                         });
+                                     }
+                                  });
+                                
+                                return;
+                             }
+                            
                          }
 
                      }
@@ -496,8 +573,6 @@ function( pageShift, navButton, canvasParser, __a ){
 
         } /*-- end artwork --*/
         
-    };
-    
-    //return window.app.mod.screen.canvasMain;
+    }; /*-- end __a --*/
     
 });
