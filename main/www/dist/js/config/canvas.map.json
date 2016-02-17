@@ -13,37 +13,37 @@
                     "index"  : 1,
                     "locked" : false,
                     "source" : "img/canvas/shapes/circle.svg",
-                    "best-score" : 2
+                    "best-score" : 0
                 },
                 {
                     "code": "002",
                     "name"   : "triangle",
                     "index"  : 2,
-                    "locked" : false,
+                    "locked" : true,
                     "source" : "img/canvas/shapes/triangle.svg",
-                    "best-score" : 3
+                    "best-score" : 0
                 },
                 {
                     "code": "003",
                     "name"   : "square",
                     "index"  : 3,
-                    "locked" : false,
+                    "locked" : true,
                     "source" : "img/canvas/shapes/square.svg",
-                    "best-score" : 3
+                    "best-score" : 0
                 },
                 {
                     "code": "004",
                     "name"   : "oval",
                     "index"  : 4,
-                    "locked" : false,
+                    "locked" : true,
                     "source" : "img/canvas/shapes/oval.svg",
-                    "best-score" : 3
+                    "best-score" : 0
                 },
                 {
                     "code": "005",
                     "name"   : "star",
                     "index"  : 5,
-                    "locked" : false,
+                    "locked" : true,
                     "source" : "img/canvas/shapes/star.svg",
                     "best-score" : 0
                 }
@@ -60,7 +60,7 @@
                     "code": "001",
                     "name"   : "chicken",
                     "index"  : 6,
-                    "locked" : false,
+                    "locked" : true,
                     "source" : "img/canvas/animals/chicken.svg",
                     "best-score" : 0
                 },
@@ -158,7 +158,7 @@
                     "code": "001",
                     "name"   : "mickey",
                     "index"  : 16,
-                    "locked" : false,
+                    "locked" : true,
                     "source" : "img/canvas/disney/mickey.svg",
                     "best-score" : 0
                 },
@@ -166,7 +166,7 @@
                     "code": "002",
                     "name"   : "dumbo",
                     "index"  : 17,
-                    "locked" : false,
+                    "locked" : true,
                     "source" : "img/canvas/disney/dumbo.svg",
                     "best-score" : 0
                 },
@@ -174,7 +174,7 @@
                     "code": "003",
                     "name"   : "pooh",
                     "index"  : 18,
-                    "locked" : false,
+                    "locked" : true,
                     "source" : "img/canvas/disney/pooh.svg",
                     "best-score" : 0
                 },
@@ -182,7 +182,7 @@
                     "code": "004",
                     "name"   : "phineas",
                     "index"  : 19,
-                    "locked" : false,
+                    "locked" : true,
                     "source" : "img/canvas/disney/phineas.svg",
                     "best-score" : 0
                 },
@@ -190,7 +190,7 @@
                     "code": "005",
                     "name"   : "pluto",
                     "index"  : 19,
-                    "locked" : false,
+                    "locked" : true,
                     "source" : "img/canvas/disney/pluto.svg",
                     "best-score" : 0
                 }
