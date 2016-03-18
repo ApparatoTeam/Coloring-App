@@ -42,6 +42,7 @@
     position: absolute;
     top: 0;
     margin: auto;
+    background-color: #DCDBDB;
 }
 
 /*-- toolbar panel --*/
@@ -53,7 +54,7 @@
     right: 0;
     
     background-color: rgba(0,0,0,0.28);
-    border-left: 1px solid rgba(0,0,0,0.3);
+    border-left: 1px solid rgba(0,0,0,1);
 }
 
 [data-screen="canvas-main"] #panel-toolbar .tool{
@@ -170,18 +171,13 @@
 [data-screen="canvas-main"] #panel-workarea #canvas-cardboard-wrap{
     position: absolute;
     z-index: 1;
-    top: 50%;
-    left: 50%;
+    top: 0;
+    left: 0;
     
-    width: 95%;
-    height: 90%;
-    background-color: #eaeaea;
-    
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
-    
-    -webkit-box-shadow: 0 3px 10px 3px #222;
-    box-shadow: 0 3px 10px 3px #222;
+    width: 100%;
+    height: 100%;
+
+    background-color: inherit;
 }
 
 /*- workarea pattern -*/

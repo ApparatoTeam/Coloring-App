@@ -1,17 +1,17 @@
 define([ window.app.__c__.pageShift ], function(pageShift, __a){
     
-    window.app.mod.screen.index = null;
-    __a = window.app.mod.screen.index;
+    window.app.mod.screen.home = null;
+    __a = window.app.mod.screen.home;
     
     __a = {
         activate : function( self ){
             self = this;
             
              pageShift.set({
-                name : 'index',
+                name : 'home',
                 data : function(){ 
                     window.app.navigation.init();
-                    console.log('Welcome to index page');   
+                    console.log('Welcome to home page');   
                  }
              });
          },

@@ -79,8 +79,9 @@ define([ window.app.__c__.pageShift ],  function( pageShift,  __a ){
                 requirejs(['text!'+source], function(svg){
                     reference.html( svg );
                     
-                    svg = svg.replace(/fill:(\w*);/g, 'fill:transparent; ');
+                    svg = svg.replace(/fill:(\w*);/g, 'fill:#EAEAEA; ');
                     canvas.html( svg );
+                    canvas.children('svg').attr({ id : 'canvas-cardboard' });
                     
                  });
 
@@ -167,12 +168,9 @@ define([ window.app.__c__.pageShift ],  function( pageShift,  __a ){
                 var self = this;
                 
                 dependencies = [ 'js/lib/iscroll' ];
-                
                 requirejs( dependencies, function(){
-                    
                     self.__iscroll();
                     self.__interact();
-                    
                  });
              },
             
@@ -187,6 +185,7 @@ define([ window.app.__c__.pageShift ],  function( pageShift,  __a ){
             
             __interact : function(){
                 
+                /*-- 1. pattern image: resize + drag actions --*/
                 interact( '#canvas-pattern-wrap' )
                 .draggable({
                     restrict : { restriction : 'parent' },
@@ -222,6 +221,7 @@ define([ window.app.__c__.pageShift ],  function( pageShift,  __a ){
                     target.style.height = event.rect.height + 'px';
 
                   });
+                
              } /*-- AMD.__interact --*/
         
             
@@ -316,9 +316,16 @@ define([ window.app.__c__.pageShift ],  function( pageShift,  __a ){
                         index : 0,
 
                         init : function( star, callback ){
-                            var self = this;
-
-                            star = Math.round( star );
+                            var self = this
+                            ,   ac = parseInt( (localStorage.getItem('active-canvas-specs')).split('--')[3] ) + 1;
+                            
+                            if( ac > 2 ){
+                                star = Math.ceil( star );
+                             }else{
+                                star = Math.round( star );
+                              }
+                            
+                            //star = Math.round( star );
                             //star = Math.ceil( star );
 
                             (new TimelineLite({
@@ -361,8 +368,6 @@ define([ window.app.__c__.pageShift ],  function( pageShift,  __a ){
                                     index = parseInt(self.index) + 1;
                                     
                                     if(index > 20) return;
-                                    
-                                    console.log( index );
                                     
                                     var pattern = '{"code":"\\d+\\d+\\d+","name":"\\w+","index":'+index+',"locked":(true|false),"source":"img\/canvas\/\\w+\/\\w+\\.svg","best-score":[0-3]}'
                                     ,   regex = new RegExp(pattern, 'g')
@@ -437,32 +442,45 @@ define([ window.app.__c__.pageShift ],  function( pageShift,  __a ){
                                 return;
                              },
                             
+                            /*-- to be integrated --*/
                             next : function( self ){
                                 self = this;
                                 
                                 var handler = window.localStorage.getItem('active-canvas-specs')
-                                ,   categoryIndex = parseInt(handler.split('--')[3])
                                 ,   tileIndex = parseInt(handler.split('--')[2])
                                 ,   obj = JSON.parse( window.localStorage.getItem('canvas') )
                                 ,   cache = '';
                                 
-                                // alias--name--tileIndex--categoryIndex
-                                
-                                tileIndex+=1;    
-                                if( tileIndex >= 5 ){
-                                    tileIndex = 0;
-                                    
-                                    categoryIndex+=1;
-                                    if( categoryIndex >= 5){
-                                        
-                                        categoryIndex = 0;
-                                     }
-                                }
-                                
-                                cache = obj[categoryIndex]['name'] + '--';
-                                cache += obj[categoryIndex]['alias'] + '--';
-                                cache += tileIndex + '--';
-                                cache += categoryIndex;
+                                self = this;
+                                var canvasArrayL1 = JSON.parse( window.app.cache('canvas') );
+
+                                for( var L1 = 0; L1 < canvasArrayL1.length; L1++ ){
+
+                                    if( canvasArrayL1[L1].name == ( localStorage.getItem('active-canvas-specs') ).split('--')[0] ){
+
+                                        var canvasArrayL2 = canvasArrayL1[L1].items;
+
+                                        //--> [UI] label category name
+                                        self.headerLabel( canvasArrayL1[L1].alias, 'category' );
+                                        //--> [UI] colorize theme
+                                        self.theme( canvasArrayL1[L1].theme );
+
+                                        for( var L2 = 0; L2 < canvasArrayL2.length; L2++ ){
+
+                                            if( canvasArrayL2[L2]['index'] == ( localStorage.getItem('active-canvas-specs') ).split('--')[2] ){
+
+                                                //--> [UI] label canvas name
+                                                self.headerLabel( canvasArrayL2[L2].name, 'name' );
+                                                //--> [UI] fill reference image
+                                                self.image( canvasArrayL2[L2].source );
+
+                                             } /*-! end active canvas filter -*/
+
+                                         } /*-! end category item (canvas) loop -*/
+
+                                     } /*-! end active category filter -*/
+
+                                 } /*-! end category loop -*/
                                 
                                 window.app.cache({
                                     'active-canvas-specs' : cache,

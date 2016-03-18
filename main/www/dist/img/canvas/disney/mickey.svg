@@ -47,23 +47,34 @@
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccc" />
   </g>
-  <g
+    
+    
+    <g
      inkscape:groupmode="layer"
      id="layer7"
-     inkscape:label="right-pupil">
+     inkscape:label="right-pupil"
+     style="display:inline">
     <path data-segment data-segment-alias="right-pupil" data-segment-color="black"
        style="display:inline;fill:black;fill-rule:evenodd;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 542.17058,457.37096 c 18.43398,-49.14305 -28.23652,-65.19107 -17.17259,-5.55584 z"
        id="path4178-5"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccc" />
+  </g>
+    
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="extra"
+     style="display:inline">
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="display:inline;fill: none;fill-rule:evenodd;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 449.64285,470.71428 c 33.94474,-19.86596 71.27221,-20.56336 108.92858,-4.99999"
        id="path4199"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
   </g>
+  
   <g
      inkscape:groupmode="layer"
      id="layer2"
