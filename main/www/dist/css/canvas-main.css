@@ -136,6 +136,27 @@
     overflow: hidden;
 }
 
+[data-screen="canvas-main"] #panel-toolbar #colour:after{
+    content: '';
+    position: absolute;
+
+    bottom: 0;
+    left: 50%;
+
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    
+    width: 0;
+    height: 0;
+
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 12px solid rgba(0,0,0,0.5);
+
+    pointer-events: none;
+    -webkit-user-select: none;
+}
+
 [data-screen="canvas-main"] #panel-toolbar #colour #scroller{
     padding: 5px 0;
 }

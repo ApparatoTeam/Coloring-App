@@ -302,8 +302,8 @@ require( ['require.domReady'], function(domReady){
                     ;
                     
                     /*- temp 
-                    timeline.progress(1);
-                    -*/
+                    timeline.progress(1);-*/
+                    
                     
                  } /*- end startup.preload.intro -*/
              } /*- end startup.preload -*/

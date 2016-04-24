@@ -3,7 +3,8 @@ define([ window.app.__c__.pageShift ], function( pageShift, __a ){
     __a = window.app.mod.screen.canvas;
     
     __a = {
-        
+        SWIPER : null,
+
         activate : function( self ){
             self = this;
             
@@ -29,13 +30,14 @@ define([ window.app.__c__.pageShift ], function( pageShift, __a ){
              },
             
             _swiper : function(){
-                new Swiper('.swiper-container', {
+                __a.SWIPER = new Swiper('.swiper-container', {
                     pagination: '.swiper-pagination',
                     paginationClickable: true,
                     spaceBetween: 0,
                     nextButton: '.btn-level-next',
                     prevButton: '.btn-level-prev'
                 });
+
              }
             
          }, /*-- end AMD --*/
@@ -236,6 +238,12 @@ define([ window.app.__c__.pageShift ], function( pageShift, __a ){
                     autoAlpha : 1,
                     onComplete : function(){
                         self.unlock();
+
+                        var x = ( $('.canvas-tiles-unlocked').length == 5 || $('.canvas-tiles-unlocked').length == 10 || $('.canvas-tiles-unlocked').length == 15 || $('.canvas-tiles-unlocked').length == 20 ) ? $('.canvas-tiles-unlocked').length - 1 : $('.canvas-tiles-unlocked').length
+                        ,   slideToIndex = Math.floor(x / 5);
+
+                        __a.SWIPER.slideTo( slideToIndex );
+
                      }    
                  });
                 

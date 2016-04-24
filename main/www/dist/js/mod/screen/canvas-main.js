@@ -82,7 +82,18 @@ define([ window.app.__c__.pageShift ],  function( pageShift,  __a ){
                     svg = svg.replace(/fill:(\w*);/g, 'fill:#EAEAEA; ');
                     canvas.html( svg );
                     canvas.children('svg').attr({ id : 'canvas-cardboard' });
-                    
+
+                    window.setTimeout( function(){
+                        new IScroll('#canvas-cardboard-wrap', {
+                            zoom: true,
+                            scrollX: true,
+                            scrollY: true,
+                            mouseWheel: true,
+                            wheelAction: 'zoom',
+                            click : true
+                        });
+                    }, 100);
+
                  });
 
                 return this;
@@ -179,7 +190,6 @@ define([ window.app.__c__.pageShift ],  function( pageShift,  __a ){
                     mouseWheel : true,
                     click : true
                  });
-                
                 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
              }, /*-- AMD.__iscroll --*/
             
