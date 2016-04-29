@@ -398,6 +398,12 @@ define([ window.app.__c__.pageShift ],  function( pageShift,  __a ){
                             $('#rating-overlay').removeAttr('class')
                             .addClass( (star > 0) ? 'passed-rating' : 'failed-rating' );
 
+                            if( star > 0 ){
+                                app.audio.gameSucceed.play();
+                            }else{
+                                app.audio.gameFailed.play();
+                            }
+
                             if( star < 1 )
                                 ( typeof cb == 'function' ) ? cb() : null;
 

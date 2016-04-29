@@ -1,6 +1,10 @@
 /*--
  - Header 
  --*/
+[data-screen="index"]{
+    
+}
+
 [data-screen="home"] #home-header{
     position: absolute;
     width: 100%;
